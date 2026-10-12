@@ -4,8 +4,11 @@ import { ControlPanel } from './components/ControlPanel';
 import { ScenarioSelector } from './components/ScenarioSelector';
 import { StatusPanel } from './components/StatusPanel';
 import { ExplanationPanel } from './components/ExplanationPanel';
-import { ProcessState, SimulationState, Scenario } from './core/types';
+import { SimulationState, Scenario } from './core/types';
 import { SimulationEngine } from './core/simulationEngine';
+import { safeScenario } from './scenarios/safeScenario';
+import { deadlockScenario } from './scenarios/deadlockScenario';
+import { preventionScenario } from './scenarios/preventionScenario';
 
 function App() {
   const [isDark, setIsDark] = useState(false);
@@ -14,137 +17,7 @@ function App() {
   const [engine, setEngine] = useState<SimulationEngine | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
 
-  const scenarios: Scenario[] = [
-    {
-      id: 'safe',
-      name: 'Safe Execution',
-      description: 'No deadlock - processes complete sequentially',
-      initialState: {
-        processes: [
-          {
-            id: 'p1',
-            name: 'Process 1',
-            heldResources: [],
-            requestedResources: [],
-            state: 'idle' as ProcessState,
-          },
-          {
-            id: 'p2',
-            name: 'Process 2',
-            heldResources: [],
-            requestedResources: [],
-            state: 'idle' as ProcessState,
-          },
-        ],
-        resources: [
-          {
-            id: 'r1',
-            name: 'Resource 1',
-            totalInstances: 2,
-            availableInstances: 2,
-            heldBy: [],
-          },
-          {
-            id: 'r2',
-            name: 'Resource 2',
-            totalInstances: 2,
-            availableInstances: 2,
-            heldBy: [],
-          },
-        ],
-        currentStep: 0,
-        isDeadlocked: false,
-        deadlockCycle: [],
-        history: [],
-      },
-    },
-    {
-      id: 'deadlock',
-      name: 'Circular Wait',
-      description: 'Deadlock demonstration with circular wait condition',
-      initialState: {
-        processes: [
-          {
-            id: 'p1',
-            name: 'Process 1',
-            heldResources: ['r1'],
-            requestedResources: ['r2'],
-            state: 'waiting' as ProcessState,
-          },
-          {
-            id: 'p2',
-            name: 'Process 2',
-            heldResources: ['r2'],
-            requestedResources: ['r1'],
-            state: 'waiting' as ProcessState,
-          },
-        ],
-        resources: [
-          {
-            id: 'r1',
-            name: 'Resource 1',
-            totalInstances: 1,
-            availableInstances: 0,
-            heldBy: ['p1'],
-          },
-          {
-            id: 'r2',
-            name: 'Resource 2',
-            totalInstances: 1,
-            availableInstances: 0,
-            heldBy: ['p2'],
-          },
-        ],
-        currentStep: 0,
-        isDeadlocked: true,
-        deadlockCycle: ['p1', 'r1', 'p2', 'r2'],
-        history: [],
-      },
-    },
-    {
-      id: 'prevention',
-      name: 'Banker\'s Algorithm',
-      description: 'Deadlock prevention using Banker\'s algorithm',
-      initialState: {
-        processes: [
-          {
-            id: 'p1',
-            name: 'Process 1',
-            heldResources: [],
-            requestedResources: [],
-            state: 'idle' as ProcessState,
-          },
-          {
-            id: 'p2',
-            name: 'Process 2',
-            heldResources: [],
-            requestedResources: [],
-            state: 'idle' as ProcessState,
-          },
-        ],
-        resources: [
-          {
-            id: 'r1',
-            name: 'Resource 1',
-            totalInstances: 3,
-            availableInstances: 3,
-            heldBy: [],
-          },
-          {
-            id: 'r2',
-            name: 'Resource 2',
-            totalInstances: 2,
-            availableInstances: 2,
-            heldBy: [],
-          },
-        ],
-        currentStep: 0,
-        isDeadlocked: false,
-        deadlockCycle: [],
-        history: [],
-      },
-    },
-  ];
+  const scenarios: Scenario[] = [safeScenario, deadlockScenario, preventionScenario];
 
   useEffect(() => {
     if (isDark) {
