@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react';
-import { Process } from './components/Process';
-import { Resource } from './components/Resource';
-import { ExplanationPanel } from './components/ExplanationPanel';
-import { ProcessState } from './core/types';
+import { SimulationCanvas } from './components/SimulationCanvas';
+import { ProcessState, SimulationState } from './core/types';
 
 function App() {
   const [isDark, setIsDark] = useState(false);
@@ -15,20 +13,57 @@ function App() {
     }
   }, [isDark]);
 
-  const testProcess = {
-    id: 'p1',
-    name: 'Process 1',
-    heldResources: ['r1'],
-    requestedResources: ['r2'],
-    state: 'waiting' as ProcessState,
-  };
-
-  const testResource = {
-    id: 'r1',
-    name: 'Resource 1',
-    totalInstances: 3,
-    availableInstances: 1,
-    heldBy: ['p1'],
+  const testState: SimulationState = {
+    processes: [
+      {
+        id: 'p1',
+        name: 'Process 1',
+        heldResources: ['r1'],
+        requestedResources: ['r2'],
+        state: 'waiting' as ProcessState,
+      },
+      {
+        id: 'p2',
+        name: 'Process 2',
+        heldResources: ['r2'],
+        requestedResources: ['r3'],
+        state: 'waiting' as ProcessState,
+      },
+      {
+        id: 'p3',
+        name: 'Process 3',
+        heldResources: ['r3'],
+        requestedResources: ['r1'],
+        state: 'waiting' as ProcessState,
+      },
+    ],
+    resources: [
+      {
+        id: 'r1',
+        name: 'Resource 1',
+        totalInstances: 1,
+        availableInstances: 0,
+        heldBy: ['p1'],
+      },
+      {
+        id: 'r2',
+        name: 'Resource 2',
+        totalInstances: 1,
+        availableInstances: 0,
+        heldBy: ['p2'],
+      },
+      {
+        id: 'r3',
+        name: 'Resource 3',
+        totalInstances: 1,
+        availableInstances: 0,
+        heldBy: ['p3'],
+      },
+    ],
+    currentStep: 0,
+    isDeadlocked: true,
+    deadlockCycle: ['p1', 'r1', 'p2', 'r2', 'p3', 'r3'],
+    history: [],
   };
 
   return (
@@ -45,16 +80,7 @@ function App() {
         </button>
       </div>
       
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-        <Process process={testProcess} />
-        <Resource resource={testResource} />
-      </div>
-      
-      <ExplanationPanel
-        title="Test Explanation"
-        content="This is a test of the explanation panel component."
-        isDeadlocked={false}
-      />
+      <SimulationCanvas state={testState} />
     </div>
   );
 }
