@@ -4,6 +4,9 @@ import { ControlPanel } from './components/ControlPanel';
 import { ScenarioSelector } from './components/ScenarioSelector';
 import { StatusPanel } from './components/StatusPanel';
 import { ExplanationPanel } from './components/ExplanationPanel';
+import { DeadlockConditionsPanel } from './components/DeadlockConditionsPanel';
+import { GlossaryPanel } from './components/GlossaryPanel';
+import { ProgressIndicator } from './components/ProgressIndicator';
 import { SimulationState, Scenario } from './core/types';
 import { SimulationEngine } from './core/simulationEngine';
 import { safeScenario } from './scenarios/safeScenario';
@@ -133,8 +136,9 @@ function App() {
             onSelect={handleScenarioSelect}
           />
         </div>
-        <div>
+        <div className="space-y-4">
           <StatusPanel state={simulationState} />
+          <ProgressIndicator state={simulationState} />
         </div>
       </div>
 
@@ -157,6 +161,11 @@ function App() {
           content={getExplanation()}
           isDeadlocked={simulationState.isDeadlocked}
         />
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
+        <DeadlockConditionsPanel />
+        <GlossaryPanel />
       </div>
 
       <div className="mt-4 text-sm text-gray-600 dark:text-gray-400">
