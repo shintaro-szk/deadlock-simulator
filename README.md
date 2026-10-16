@@ -109,7 +109,3 @@ src/
 - Framer Motion for animations
 - Lucide React for icons
 - Vitest for unit testing
-
-## License
-
-MIT
