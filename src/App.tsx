@@ -9,6 +9,10 @@ import { GlossaryPanel } from './components/GlossaryPanel';
 import { ProgressIndicator } from './components/ProgressIndicator';
 import { RAGVisualization } from './components/RAGVisualization';
 import { WFGVisualization } from './components/WFGVisualization';
+import { PreventionStrategiesPanel } from './components/PreventionStrategiesPanel';
+import { BankerAlgorithmPanel } from './components/BankerAlgorithmPanel';
+import { DetectionPanel } from './components/DetectionPanel';
+import { RecoveryStrategiesPanel } from './components/RecoveryStrategiesPanel';
 import { SimulationState, Scenario } from './core/types';
 import { SimulationEngine } from './core/simulationEngine';
 import { safeScenario } from './scenarios/safeScenario';
@@ -186,6 +190,22 @@ function App() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
         <DeadlockConditionsPanel />
         <GlossaryPanel />
+      </div>
+
+      <div className="mt-6">
+        <PreventionStrategiesPanel />
+      </div>
+
+      <div className="mt-6">
+        <BankerAlgorithmPanel />
+      </div>
+
+      <div className="mt-6">
+        <DetectionPanel />
+      </div>
+
+      <div className="mt-6">
+        <RecoveryStrategiesPanel />
       </div>
 
       <div className="mt-4 text-sm text-gray-600 dark:text-gray-400">
