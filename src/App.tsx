@@ -7,6 +7,8 @@ import { ExplanationPanel } from './components/ExplanationPanel';
 import { DeadlockConditionsPanel } from './components/DeadlockConditionsPanel';
 import { GlossaryPanel } from './components/GlossaryPanel';
 import { ProgressIndicator } from './components/ProgressIndicator';
+import { RAGVisualization } from './components/RAGVisualization';
+import { WFGVisualization } from './components/WFGVisualization';
 import { SimulationState, Scenario } from './core/types';
 import { SimulationEngine } from './core/simulationEngine';
 import { safeScenario } from './scenarios/safeScenario';
@@ -174,6 +176,11 @@ function App() {
           content={getExplanation()}
           isDeadlocked={simulationState.isDeadlocked}
         />
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
+        <RAGVisualization state={simulationState} />
+        <WFGVisualization state={simulationState} />
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
