@@ -4,7 +4,7 @@ An educational web application that visualizes operating system deadlock concept
 
 ## About This Project
 
-This project was developed for educational purposes as a personal project and initiative for my BSIT 2nd Year course, COMP 007 — Operating Systems, at university. The tool demonstrates and simulates how deadlocks work in operating systems, made for and used during our group presentation and classroom learning about deadlocks in OS.
+This project was developed for educational purposes as a personal project and initiative for my BSIT 2nd Year course, COMP 007 — Operating Systems, at university. The tool demonstrates and simulates how deadlocks work in operating systems, made for and used during our group presentation and classroom learning.
 
 ### Development Methodology
 
