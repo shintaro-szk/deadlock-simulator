@@ -2,18 +2,34 @@
 
 An educational web application that visualizes operating system deadlock concepts through interactive simulations.
 
+## About This Project
+
+This project was developed for educational purposes under the **Second Year course, COMP 007 — Operating Systems**, at university. It serves as a demonstration and simulation tool to illustrate how deadlocks work in operating systems during group presentations and classroom learning.
+
+### Development Methodology
+
+This project was developed through **Intent-Driven Software Development** and **Generative AI–assisted development** as part of the engineering and development process. The implementation follows a phase-gated approach outlined in the project blueprint, ensuring systematic development and verification at each stage.
+
 ## Overview
 
-This tool helps students understand deadlocks in operating systems. It provides visual simulations of processes requesting, holding, and releasing resources. Users can observe deadlock conditions and prevention algorithms in real-time.
+This tool helps students understand deadlocks in operating systems. It provides visual simulations of processes requesting, holding, and releasing resources. Users can observe deadlock conditions, prevention algorithms, avoidance strategies, detection methods, and recovery techniques in real-time.
 
 ## Features
 
 - Interactive simulation of process-resource allocation
-- Visual resource allocation graph with SVG rendering
+- Visual resource allocation graph (RAG) with SVG rendering
+- Wait-for graph (WFG) visualization for deadlock cycle detection
 - Three pre-built scenarios: safe execution, circular wait, Banker's algorithm
 - Step-by-step execution with play, pause, and reset controls
 - Real-time deadlock detection and cycle highlighting
-- Educational panels explaining deadlock conditions and terminology
+- Enhanced deadlock conditions panel with detailed examples and expandable sections
+- Deadlock prevention strategies panel with pros and cons for each method
+- Banker's algorithm educational panel with step-by-step explanations
+- Deadlock detection methods panel for single and multiple-instance resources
+- Deadlock recovery strategies panel with selection criteria
+- References and resources panel with scientific citations
+- Educational glossary panel for OS terminology
+- Progress indicator showing simulation completion
 - Dark mode support
 - Keyboard shortcuts for accessibility
 - Responsive design for desktop and mobile
@@ -65,14 +81,23 @@ npm test
 
 ## Educational Concepts
 
-The simulator demonstrates the four necessary conditions for deadlock:
+The simulator demonstrates comprehensive deadlock concepts:
 
+### Four Necessary Conditions for Deadlock
 - **Mutual Exclusion**: Resources cannot be shared. Only one process can use a resource at a time.
 - **Hold and Wait**: Processes hold resources while waiting for other resources.
 - **No Preemption**: Resources cannot be taken away from a process. They must be released voluntarily.
 - **Circular Wait**: A set of processes wait for each other in a circle.
 
-The simulator also shows prevention strategies like the Banker's Algorithm.
+### Deadlock Handling Approaches
+- **Prevention**: Breaking one of the four necessary conditions
+- **Avoidance**: Using algorithms like Banker's to maintain safe states
+- **Detection**: Identifying deadlocks through RAG/WFG or matrix-based methods
+- **Recovery**: Process termination, rollback, resource preemption, or concurrency control
+
+### Graph-Based Visualization
+- **Resource Allocation Graph (RAG)**: Shows processes (circles), resources (squares), request edges (P → R), and assignment edges (R → P)
+- **Wait-for Graph (WFG)**: Simplified RAG showing only processes and wait relationships
 
 ## Project Structure
 
@@ -88,7 +113,14 @@ src/
 │   ├── Resource.tsx
 │   ├── DeadlockConditionsPanel.tsx
 │   ├── GlossaryPanel.tsx
-│   └── ProgressIndicator.tsx
+│   ├── ProgressIndicator.tsx
+│   ├── RAGVisualization.tsx           # Resource Allocation Graph visualization
+│   ├── WFGVisualization.tsx           # Wait-for Graph visualization
+│   ├── PreventionStrategiesPanel.tsx  # Deadlock prevention strategies
+│   ├── BankerAlgorithmPanel.tsx      # Banker's algorithm educational panel
+│   ├── DetectionPanel.tsx            # Deadlock detection methods
+│   ├── RecoveryStrategiesPanel.tsx    # Deadlock recovery strategies
+│   └── ReferencesPanel.tsx           # References and resources
 ├── core/               # Core logic and algorithms
 │   ├── types.ts
 │   ├── deadlockDetector.ts
@@ -109,3 +141,22 @@ src/
 - Framer Motion for animations
 - Lucide React for icons
 - Vitest for unit testing
+
+## Implementation Phases
+
+This project follows a phase-gated development approach:
+
+- **Phase 1-9**: Core application setup, simulation engine, base UI components, scenarios, and documentation
+- **Phase 10**: Enhanced Deadlock Conditions Panel with detailed examples and expandable sections
+- **Phase 11**: RAG and WFG Visualization components for graph-based deadlock detection
+- **Phase 12**: Deadlock Prevention Strategies panel with four prevention methods
+- **Phase 13**: Banker's Algorithm educational panel with step-by-step explanations
+- **Phase 14**: Deadlock Detection Methods panel for single and multiple-instance resources
+- **Phase 15**: Deadlock Recovery Strategies panel with selection criteria
+- **Phase 16**: References and Resources panel with scientific citations
+
+For detailed implementation specifications, refer to the project blueprint.
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
