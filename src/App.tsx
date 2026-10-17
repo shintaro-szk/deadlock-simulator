@@ -13,6 +13,7 @@ import { PreventionStrategiesPanel } from './components/PreventionStrategiesPane
 import { BankerAlgorithmPanel } from './components/BankerAlgorithmPanel';
 import { DetectionPanel } from './components/DetectionPanel';
 import { RecoveryStrategiesPanel } from './components/RecoveryStrategiesPanel';
+import { ReferencesPanel } from './components/ReferencesPanel';
 import { SimulationState, Scenario } from './core/types';
 import { SimulationEngine } from './core/simulationEngine';
 import { safeScenario } from './scenarios/safeScenario';
@@ -206,6 +207,10 @@ function App() {
 
       <div className="mt-6">
         <RecoveryStrategiesPanel />
+      </div>
+
+      <div className="mt-6">
+        <ReferencesPanel />
       </div>
 
       <div className="mt-4 text-sm text-gray-600 dark:text-gray-400">
