@@ -4,15 +4,15 @@ An educational web application that visualizes operating system deadlock concept
 
 ## About This Project
 
-This project was developed for educational purposes under the **Second Year course, COMP 007 — Operating Systems**, at university. It serves as a demonstration and simulation tool to illustrate how deadlocks work in operating systems during group presentations and classroom learning.
+This project was developed for educational purposes as a personal project and initiative for my BSIT 2nd Year course, COMP 007 — Operating Systems, at university. The tool demonstrates and simulates how deadlocks work in operating systems, made for and used during our group presentation and classroom learning about deadlocks in OS.
 
 ### Development Methodology
 
-This project was developed through **Intent-Driven Software Development** and **Generative AI–assisted development** as part of the engineering and development process. The implementation follows a phase-gated approach outlined in the project blueprint, ensuring systematic development and verification at each stage.
+This project was developed through Intent-Driven Software Development and Generative AI-assisted development as part of the engineering and development process. The implementation follows a phase-gated approach to ensure systematic development and verification at each stage.
 
 ## Overview
 
-This tool helps students understand deadlocks in operating systems. It provides visual simulations of processes requesting, holding, and releasing resources. Users can observe deadlock conditions, prevention algorithms, avoidance strategies, detection methods, and recovery techniques in real-time.
+Students use this tool to understand deadlocks in operating systems. The tool provides visual simulations of processes requesting, holding, and releasing resources. Observe deadlock conditions, prevention algorithms, avoidance strategies, detection methods, and recovery techniques in real-time.
 
 ## Features
 
@@ -36,12 +36,12 @@ This tool helps students understand deadlocks in operating systems. It provides 
 
 ## Setup Instructions
 
-1. Install dependencies:
+1. Install dependencies.
    ```bash
    npm install
    ```
 
-2. Start the development server:
+2. Start the development server.
    ```bash
    npm run dev
    ```
@@ -50,17 +50,17 @@ This tool helps students understand deadlocks in operating systems. It provides 
 
 ## Build for Production
 
-Run the following command to create an optimized production build:
+Run this command to create an optimized production build.
 
 ```bash
 npm run build
 ```
 
-The build output will be in the `dist` directory.
+The build output is in the `dist` directory.
 
 ## Run Tests
 
-Execute the unit tests with Vitest:
+Execute the unit tests with Vitest.
 
 ```bash
 npm test
@@ -81,23 +81,23 @@ npm test
 
 ## Educational Concepts
 
-The simulator demonstrates comprehensive deadlock concepts:
+The simulator demonstrates these deadlock concepts.
 
 ### Four Necessary Conditions for Deadlock
-- **Mutual Exclusion**: Resources cannot be shared. Only one process can use a resource at a time.
-- **Hold and Wait**: Processes hold resources while waiting for other resources.
-- **No Preemption**: Resources cannot be taken away from a process. They must be released voluntarily.
-- **Circular Wait**: A set of processes wait for each other in a circle.
+- **Mutual Exclusion**: Resources cannot be shared. One process uses a resource at a time.
+- **Hold and Wait**: Processes hold resources while they wait for other resources.
+- **No Preemption**: Resources cannot be taken away. Processes release them voluntarily.
+- **Circular Wait**: Processes wait for each other in a circle.
 
 ### Deadlock Handling Approaches
-- **Prevention**: Breaking one of the four necessary conditions
-- **Avoidance**: Using algorithms like Banker's to maintain safe states
-- **Detection**: Identifying deadlocks through RAG/WFG or matrix-based methods
-- **Recovery**: Process termination, rollback, resource preemption, or concurrency control
+- **Prevention**: Break one of the four necessary conditions.
+- **Avoidance**: Use algorithms to maintain safe states.
+- **Detection**: Identify deadlocks through graphs or matrix methods.
+- **Recovery**: Terminate processes, roll back, preempt resources, or control concurrency.
 
 ### Graph-Based Visualization
-- **Resource Allocation Graph (RAG)**: Shows processes (circles), resources (squares), request edges (P → R), and assignment edges (R → P)
-- **Wait-for Graph (WFG)**: Simplified RAG showing only processes and wait relationships
+- **Resource Allocation Graph (RAG)**: Shows processes as circles and resources as squares. Request edges go from process to resource. Assignment edges go from resource to process.
+- **Wait-for Graph (WFG)**: Shows only processes and wait relationships.
 
 ## Project Structure
 
@@ -144,18 +144,16 @@ src/
 
 ## Implementation Phases
 
-This project follows a phase-gated development approach:
+The project uses a phase-gated development approach.
 
 - **Phase 1-9**: Core application setup, simulation engine, base UI components, scenarios, and documentation
-- **Phase 10**: Enhanced Deadlock Conditions Panel with detailed examples and expandable sections
+- **Phase 10**: Enhanced Deadlock Conditions Panel with examples and expandable sections
 - **Phase 11**: RAG and WFG Visualization components for graph-based deadlock detection
 - **Phase 12**: Deadlock Prevention Strategies panel with four prevention methods
 - **Phase 13**: Banker's Algorithm educational panel with step-by-step explanations
 - **Phase 14**: Deadlock Detection Methods panel for single and multiple-instance resources
 - **Phase 15**: Deadlock Recovery Strategies panel with selection criteria
 - **Phase 16**: References and Resources panel with scientific citations
-
-For detailed implementation specifications, refer to the project blueprint.
 
 ## License
 
