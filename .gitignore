@@ -1,5 +1,6 @@
 AGENTS.md
 BLUEPRINT.md
+Deadlocks.md
 node_modules/
 dist/
 .DS_Store
