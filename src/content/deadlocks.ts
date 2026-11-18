@@ -69,6 +69,17 @@ export const deck = {
   subtitle: 'Concepts, handling, and recovery',
 } as const;
 
+/** The author and the source code of this app. The footer and the chapter rail show these values. */
+export const credits = {
+  author: 'Shintaro A. Suzuki',
+  authorLabel: 'Developed by',
+  repoUrl: 'https://github.com/shintaro-szk/deadlock-simulator',
+  repoPath: 'shintaro-szk/deadlock-simulator',
+  repoLabel: 'View source on GitHub',
+  newTab: '(opens in a new tab)',
+  basedOn: `Based on the presentation “${deck.title}: ${deck.subtitle}”.`,
+} as const;
+
 export const chapters: readonly Chapter[] = [
   {
     id: 'concept',

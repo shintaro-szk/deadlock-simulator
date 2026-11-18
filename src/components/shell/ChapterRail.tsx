@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
-import { chapters, deck, type ChapterId } from '../../content/deadlocks';
+import { Github } from 'lucide-react';
+import { chapters, credits, deck, type ChapterId } from '../../content/deadlocks';
 import { scrollBehavior } from '../../hooks/motion';
 import { BrandMark } from './BrandMark';
 
@@ -43,6 +44,19 @@ export function ChapterRail({ active }: ChapterRailProps) {
         <div className="flex justify-between"><dt>Step</dt><dd className="text-fg-muted">← →</dd></div>
         <div className="flex justify-between"><dt>Reset</dt><dd className="text-fg-muted">R</dd></div>
       </dl>
+      <div className="mt-5 flex items-center justify-between gap-2 border-t border-line pt-4">
+        <span className="truncate text-xs text-fg-faint">{credits.author}</span>
+        <a
+          href={credits.repoUrl}
+          target="_blank"
+          rel="noreferrer"
+          title={credits.repoLabel}
+          className="-m-1.5 flex shrink-0 items-center justify-center p-1.5 text-fg-muted transition-colors duration-150 hover:text-fg coarse:min-h-11 coarse:min-w-11"
+        >
+          <Github size={16} aria-hidden="true" />
+          <span className="sr-only">{`${credits.repoLabel} ${credits.newTab}`}</span>
+        </a>
+      </div>
     </nav>
   );
 }

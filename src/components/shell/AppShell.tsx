@@ -3,6 +3,7 @@ import { chapters, deck, type ChapterId } from '../../content/deadlocks';
 import { ActiveChapterContext } from './activeChapter';
 import { ChapterBar, ChapterRail } from './ChapterRail';
 import { ChapterSection } from './ChapterSection';
+import { SiteFooter } from './SiteFooter';
 
 interface AppShellProps {
   /** A live demo for some chapters. */
@@ -52,9 +53,7 @@ export function AppShell({ demos }: AppShellProps) {
             {chapters.map((chapter) => (
               <ChapterSection key={chapter.id} chapter={chapter} demo={demos[chapter.id]} />
             ))}
-            <footer className="border-t border-line py-10 font-mono text-xs text-fg-faint">
-              Based on the presentation “{deck.title}: {deck.subtitle}”.
-            </footer>
+            <SiteFooter />
           </main>
         </div>
       </div>
