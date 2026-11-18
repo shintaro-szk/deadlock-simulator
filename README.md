@@ -82,7 +82,7 @@ These images come from the running app.
       <p><em>Chapter 07. Select a victim by priority, execution time, resource usage, or restart cost.</em></p>
     </td>
     <td width="50%" valign="top">
-      <img src="docs/screenshots/mobile.png" alt="Phone view: the chapter bar at the top and the chapter 01 demo at the deadlock.">
+      <img src="docs/screenshots/mobile.png" alt="Phone view: the top bar with the title, the author name, the GitHub link, and the chapter list, above the chapter 01 demo at the deadlock.">
       <p><em>Phone view. The chapter list moves to a bar at the top.</em></p>
     </td>
   </tr>
