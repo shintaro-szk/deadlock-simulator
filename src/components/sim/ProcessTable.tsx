@@ -11,6 +11,8 @@ interface ProcessTableProps {
 /** Who holds what and who waits for what. */
 export const ProcessTable = memo(function ProcessTable({ state, deadlocked }: ProcessTableProps) {
   const stuck = new Set(deadlocked);
+  // Show how often each process lost its resources, once it has happened (starvation risk).
+  const showLost = state.processes.some((p) => state.victimCount[p.id] > 0);
   return (
     <table className="w-full border-collapse text-left text-sm">
       <thead>
@@ -18,7 +20,8 @@ export const ProcessTable = memo(function ProcessTable({ state, deadlocked }: Pr
           <th scope="col" className="py-2 pr-3 font-normal">Process</th>
           <th scope="col" className="py-2 pr-3 font-normal">State</th>
           <th scope="col" className="py-2 pr-3 font-normal">Holds</th>
-          <th scope="col" className="py-2 font-normal">Waits for</th>
+          <th scope="col" className="py-2 pr-3 font-normal">Waits for</th>
+          {showLost && <th scope="col" className="py-2 text-right font-normal">Lost</th>}
         </tr>
       </thead>
       <tbody>
@@ -36,7 +39,12 @@ export const ProcessTable = memo(function ProcessTable({ state, deadlocked }: Pr
                 {isStuck ? 'deadlocked' : statusText[status]}
               </td>
               <td className={`py-2 pr-3 font-mono ${holds === 'nothing' ? 'text-fg-faint' : 'text-fg'}`}>{holds === 'nothing' ? '—' : holds}</td>
-              <td className={`py-2 font-mono ${waits === 'nothing' ? 'text-fg-faint' : 'text-wait'}`}>{waits === 'nothing' ? '—' : waits}</td>
+              <td className={`py-2 pr-3 font-mono ${waits === 'nothing' ? 'text-fg-faint' : 'text-wait'}`}>{waits === 'nothing' ? '—' : waits}</td>
+              {showLost && (
+                <td className={`py-2 text-right font-mono tabular-nums ${state.victimCount[p.id] > 0 ? 'text-wait' : 'text-fg-faint'}`}>
+                  {state.victimCount[p.id]}
+                </td>
+              )}
             </tr>
           );
         })}

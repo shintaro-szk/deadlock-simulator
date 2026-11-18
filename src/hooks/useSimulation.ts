@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useReducer } from 'react';
+import { useCallback, useEffect, useMemo, useReducer, useRef } from 'react';
 import type { Policy, Scenario, SimState } from '../core/model';
 import { createSim, step } from '../core/engine';
 
@@ -94,8 +94,12 @@ export function useSimulation(scenario: Scenario, policy: Policy, options: UseSi
     speed: 1 as Speed,
   }));
 
-  // Start again when the scenario or the policy changes.
+  // Start again when the scenario or the policy changes. The first render already has the right
+  // state, so a repeated effect run (React StrictMode) must not reset it.
+  const loaded = useRef({ scenario, policy });
   useEffect(() => {
+    if (loaded.current.scenario === scenario && loaded.current.policy === policy) return;
+    loaded.current = { scenario, policy };
     dispatch({ type: 'reset', scenario, policy });
   }, [scenario, policy]);
 

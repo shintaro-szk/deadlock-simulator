@@ -2,10 +2,16 @@ import { useMemo, type ReactNode } from 'react';
 import type { SimulationControls } from '../../hooks/useSimulation';
 import { analyzeState } from '../../core/detection';
 import { toSnapshot } from '../../core/engine';
+import { GraphStage } from '../graph/GraphStage';
+import { GraphLegend } from '../graph/GraphLegend';
+import { simVisuals } from '../graph/visuals';
+import { Panel, PanelRow } from '../ui/Panel';
 import { ProcessTable } from './ProcessTable';
 import { StatusLine } from './StatusLine';
 import { StepLog } from './StepLog';
 import { Transport } from './Transport';
+
+const NONE: readonly string[] = [];
 
 interface SimPanelProps {
   readonly sim: SimulationControls;
@@ -13,35 +19,47 @@ interface SimPanelProps {
   readonly title: string;
   /** Controls above the transport, for example a policy selector. */
   readonly controls?: ReactNode;
-  /** The main view, for example the graph. */
-  readonly children?: ReactNode;
+  /** Extra rows under the process table, for example the scripts. */
+  readonly footer?: ReactNode;
 }
 
-/** The frame for a live simulation: controls, status, view, process table, and step log. */
-export function SimPanel({ sim, title, controls, children }: SimPanelProps) {
-  const analysis = useMemo(() => analyzeState(toSnapshot(sim.state)), [sim.state]);
-  const deadlocked = sim.state.outcome === 'deadlocked' ? analysis.deadlocked : [];
+/** A live simulation: controls, status, Resource Allocation Graph, process table, and step log. */
+export function SimPanel({ sim, title, controls, footer }: SimPanelProps) {
+  const snapshot = useMemo(() => toSnapshot(sim.state), [sim.state]);
+  const analysis = useMemo(() => analyzeState(snapshot), [snapshot]);
+  const deadlocked = sim.state.outcome === 'deadlocked' ? analysis.deadlocked : NONE;
+  const visuals = useMemo(() => simVisuals(sim.state, deadlocked), [sim.state, deadlocked]);
+  // Show the cycle only while it is a deadlock. A passing cycle with free instances is not a problem here.
+  const cycle = sim.state.outcome === 'deadlocked' ? analysis.cycle : null;
 
   return (
-    <figure className="rounded-lg border border-line bg-surface" aria-label={`Simulation: ${title}`}>
-      <figcaption className="flex items-center justify-between border-b border-line px-4 py-2.5">
-        <span className="font-mono text-[11px] uppercase tracking-wider text-fg-faint">Simulation</span>
-        <span className="font-mono text-xs text-fg-muted">{title}</span>
-      </figcaption>
-      {controls && <div className="border-b border-line px-4 py-3">{controls}</div>}
-      <div className="border-b border-line px-4 py-3">
+    <Panel kind="Simulation" title={title}>
+      {controls && <PanelRow>{controls}</PanelRow>}
+      <PanelRow>
         <Transport sim={sim} />
-      </div>
-      <div className={`border-b px-4 py-3 transition-colors duration-200 ${sim.state.outcome === 'deadlocked' ? 'border-signal/50 bg-signal-dim/40' : 'border-line'}`}>
+      </PanelRow>
+      <PanelRow className={`transition-colors duration-200 ${sim.state.outcome === 'deadlocked' ? 'bg-signal-dim/40' : ''}`}>
         <StatusLine state={sim.state} deadlocked={deadlocked} />
+      </PanelRow>
+      <div>
+        <GraphStage
+          snapshot={snapshot}
+          visuals={visuals}
+          cycle={cycle}
+          cycleTone="deadlock"
+          description={`Resource Allocation Graph for ${title}, step ${sim.state.step}.`}
+        />
+        <div className="border-t border-line">
+          <GraphLegend />
+        </div>
       </div>
-      {children && <div className="border-b border-line">{children}</div>}
-      <div className="border-b border-line px-4 py-1">
+      <PanelRow className="py-1">
         <ProcessTable state={sim.state} deadlocked={deadlocked} />
-      </div>
-      <div className="px-3 py-1">
+      </PanelRow>
+      {footer && <PanelRow>{footer}</PanelRow>}
+      <PanelRow className="px-3 py-1">
         <StepLog state={sim.state} />
-      </div>
-    </figure>
+      </PanelRow>
+    </Panel>
   );
 }

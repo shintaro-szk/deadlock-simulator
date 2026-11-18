@@ -83,3 +83,15 @@
     display: none;
   }
 }
+
+/* Cycle edges move along their direction, so the loop reads as "each waits for the next". */
+@keyframes edge-march {
+  to {
+    stroke-dashoffset: -22;
+  }
+}
+
+.edge-cycle {
+  stroke-dasharray: 7 4;
+  animation: edge-march 1.1s linear infinite;
+}
