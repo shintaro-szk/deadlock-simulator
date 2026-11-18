@@ -8,7 +8,7 @@
 <p align="center">
   <a href="LICENSE"><img src="https://img.shields.io/badge/LICENSE-MIT-2E7D32?style=for-the-badge" alt="License: MIT"></a>
   <img src="https://img.shields.io/badge/TYPESCRIPT-5.6-3178C6?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript 5.6">
-  <img src="https://img.shields.io/badge/FRAMEWORK-React_18-087EA4?style=for-the-badge&logo=react&logoColor=white" alt="Framework: React 18">
+  <img src="https://img.shields.io/badge/FRAMEWORK-React_18.3-087EA4?style=for-the-badge&logo=react&logoColor=white" alt="Framework: React 18.3">
   <img src="https://img.shields.io/badge/PACKAGE_MANAGER-npm-CB3837?style=for-the-badge&logo=npm&logoColor=white" alt="Package manager: npm">
   <img src="https://img.shields.io/badge/BUILD-Vite_6-646CFF?style=for-the-badge&logo=vite&logoColor=white" alt="Build: Vite 6">
   <img src="https://img.shields.io/badge/STYLING-Tailwind_CSS_3.4-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white" alt="Styling: Tailwind CSS 3.4">
@@ -17,7 +17,7 @@
 </p>
 
 <p align="center">
-  <a href="#overview">Overview</a> · <a href="#features">Features</a> · <a href="#setup-instructions">Setup</a> · <a href="#how-to-use">How to Use</a> · <a href="#keyboard-shortcuts">Shortcuts</a> · <a href="#license">License</a>
+  <a href="#overview">Overview</a> · <a href="#preview">Preview</a> · <a href="#features">Features</a> · <a href="#setup-instructions">Setup</a> · <a href="#how-to-use">How to Use</a> · <a href="#keyboard-shortcuts">Shortcuts</a> · <a href="#license">License</a>
 </p>
 
 <p align="center"><em>An educational web application that shows how deadlocks occur in operating systems and how the system handles them. Each chapter pairs the theory with a live simulation.</em></p>
@@ -45,6 +45,48 @@ The content and scope follow the group presentation "Deadlocks in Operating Syst
 | 07 | Recovery | Kill a process, roll it back, or preempt its resources. Select the victim by priority, execution time, resource usage, or restart cost. |
 | 08 | Importance | Text only. |
 | 09 | References | Text only. |
+
+## Preview
+
+These images come from the running app.
+
+<p align="center">
+  <img src="docs/screenshots/deadlock.gif" alt="Chapter 01: P1, P2, and P3 each take one resource and then wait for the next one, until the red cycle shows a deadlock at step 10." width="720">
+</p>
+<p align="center"><em>Chapter 01. Three processes step into a circular wait.</em></p>
+
+<p align="center">
+  <img src="docs/screenshots/prevention.gif" alt="Chapter 02: with circular wait broken, each process requests resources in order, and all three processes finish." width="720">
+</p>
+<p align="center"><em>Chapter 02. Break circular wait, and the same processes finish.</em></p>
+
+<p align="center">
+  <img src="docs/screenshots/overview.png" alt="Desktop view: the chapter list on the left, and chapter 01 with the Resource Allocation Graph at the deadlock." width="900">
+</p>
+<p align="center"><em>Desktop view. The chapter list stays on the left. Each chapter pairs the text with a demo.</em></p>
+
+<table>
+  <tr>
+    <td width="50%" valign="top">
+      <img src="docs/screenshots/avoidance.png" alt="Chapter 05: the Banker's Algorithm denies P0's request for (0, 2, 0) because no safe sequence exists after the grant.">
+      <p><em>Chapter 05. The Banker's Algorithm denies an unsafe request and shows each check.</em></p>
+    </td>
+    <td width="50%" valign="top">
+      <img src="docs/screenshots/detection.png" alt="Chapter 06: periodic detection finds the deadlock at step 10 in the Resource Allocation Graph and in the Wait-for Graph.">
+      <p><em>Chapter 06. Detection finds the cycle in the RAG and in the Wait-for Graph.</em></p>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" valign="top">
+      <img src="docs/screenshots/recovery.png" alt="Chapter 07: the deadlocked processes with their priority, steps run, held resources, and restart cost. P2 has the lowest priority and is the victim.">
+      <p><em>Chapter 07. Select a victim by priority, execution time, resource usage, or restart cost.</em></p>
+    </td>
+    <td width="50%" valign="top">
+      <img src="docs/screenshots/mobile.png" alt="Phone view: the chapter bar at the top and the chapter 01 demo at the deadlock.">
+      <p><em>Phone view. The chapter list moves to a bar at the top.</em></p>
+    </td>
+  </tr>
+</table>
 
 ## Features
 

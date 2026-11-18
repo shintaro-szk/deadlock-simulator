@@ -1,26 +1,18 @@
 import { useEffect, useRef } from 'react';
 import { chapters, deck, type ChapterId } from '../../content/deadlocks';
 import { scrollBehavior } from '../../hooks/motion';
+import { BrandMark } from './BrandMark';
 
 interface ChapterRailProps {
   readonly active: ChapterId;
-}
-
-function BrandMark() {
-  return (
-    <svg viewBox="0 0 24 16" className="h-3.5 w-auto shrink-0 text-signal" aria-hidden="true">
-      <circle cx="6" cy="8" r="4.75" fill="none" stroke="currentColor" strokeWidth="2" />
-      <rect x="13.5" y="3.25" width="9.5" height="9.5" fill="none" stroke="currentColor" strokeWidth="2" />
-    </svg>
-  );
 }
 
 /** Desktop: a fixed column on the left. */
 export function ChapterRail({ active }: ChapterRailProps) {
   return (
     <nav aria-label="Chapters" className="sticky top-0 hidden h-dvh w-60 shrink-0 flex-col border-r border-line px-6 py-8 lg:flex">
-      <a href="#top" className="mb-10 flex items-center gap-2.5">
-        <BrandMark />
+      <a href="#top" className="mb-10 flex items-center gap-3">
+        <BrandMark className="h-8 w-8" />
         <span className="font-display text-brand font-semibold leading-tight text-fg">{deck.title}</span>
       </a>
       <ol className="space-y-0.5">
@@ -67,7 +59,7 @@ export function ChapterBar({ active }: ChapterRailProps) {
   return (
     <nav aria-label="Chapters" className="sticky top-0 z-20 border-b border-line bg-bg lg:hidden">
       <div className="flex items-center gap-2.5 px-4 pt-3">
-        <BrandMark />
+        <BrandMark className="h-6 w-6" />
         <span className="truncate font-display text-brand font-semibold text-fg">{deck.title}</span>
       </div>
       <ol ref={listRef} className="scrollbar-none flex gap-1 overflow-x-auto px-3 py-2">
