@@ -19,8 +19,9 @@ function useActiveChapter(): ChapterId {
     const observer = new IntersectionObserver(
       (entries) => {
         const hit = entries.find((e) => e.isIntersecting);
-        const id = hit?.target.getAttribute('data-chapter') as ChapterId | null;
-        if (id) setActive(id);
+        const id = hit?.target.getAttribute('data-chapter');
+        const chapter = chapters.find((c) => c.id === id);
+        if (chapter) setActive(chapter.id);
       },
       { rootMargin: '-35% 0px -60% 0px' },
     );
@@ -37,14 +38,13 @@ export function AppShell({ demos }: AppShellProps) {
       <a href="#concept" className="sr-only z-50 bg-signal-solid px-3 py-2 text-fg focus:not-sr-only focus:fixed focus:left-3 focus:top-3">
         Skip to content
       </a>
-      <div className="flex min-h-screen">
+      <div className="flex min-h-dvh">
         <ChapterRail active={active} />
         <div className="min-w-0 flex-1">
           <ChapterBar active={active} />
-          <main id="top" className="mx-auto max-w-[78rem] px-4 sm:px-8 lg:px-12">
+          <main id="top" className="mx-auto max-w-page px-4 sm:px-8 lg:px-12">
             <header className="pb-14 pt-12 lg:pb-20 lg:pt-24">
-              <p className="mb-4 font-mono text-xs uppercase tracking-[0.2em] text-signal-strong">Operating systems</p>
-              <h1 className="max-w-4xl font-display text-4xl font-bold leading-[1.05] text-fg sm:text-6xl lg:text-7xl">
+              <h1 className="max-w-4xl font-display text-4xl font-bold leading-display text-fg sm:text-6xl lg:text-7xl">
                 {deck.title}
               </h1>
               <p className="mt-4 text-lg text-fg-muted sm:text-xl">{deck.subtitle}</p>

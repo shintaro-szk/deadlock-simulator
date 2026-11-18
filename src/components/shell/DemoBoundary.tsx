@@ -1,4 +1,5 @@
 import { Component, type ErrorInfo, type ReactNode } from 'react';
+import { uiText } from '../../content/demoText';
 
 interface DemoBoundaryProps {
   readonly children: ReactNode;
@@ -27,14 +28,14 @@ export class DemoBoundary extends Component<DemoBoundaryProps, DemoBoundaryState
     if (!this.state.failed) return this.props.children;
     return (
       <div role="alert" className="rounded-lg border border-signal/50 bg-surface p-5">
-        <p className="font-display text-lg font-semibold text-signal-strong">This demo stopped working.</p>
-        <p className="mt-1 text-sm text-fg-muted">The chapter text is still correct. Try to load the demo again.</p>
+        <p className="font-display text-lg font-semibold text-signal-strong">{uiText.demoErrorTitle}</p>
+        <p className="mt-1 text-sm text-fg-muted">{uiText.demoErrorBody}</p>
         <button
           type="button"
           onClick={() => this.setState({ failed: false })}
-          className="mt-4 rounded border border-line-strong px-3 py-1.5 text-sm text-fg hover:border-fg-muted"
+          className="mt-4 rounded border border-line-strong px-3 py-1.5 text-sm text-fg hover:border-fg-muted coarse:min-h-11"
         >
-          Load again
+          {uiText.demoErrorRetry}
         </button>
       </div>
     );

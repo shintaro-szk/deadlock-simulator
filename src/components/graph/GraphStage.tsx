@@ -71,7 +71,7 @@ function describeNode(id: string, snapshot: AllocationSnapshot, visuals: GraphSt
 function ResourceDots({ resource, held, x, y }: { readonly resource: ResourceSpec; readonly held: number; readonly x: number; readonly y: number }) {
   if (resource.instances > 6) {
     return (
-      <text x={x} y={y + 13} textAnchor="middle" className="fill-fg-muted font-mono text-[10px]">
+      <text x={x} y={y + 13} textAnchor="middle" className="fill-fg-muted font-mono text-2xs">
         {held}/{resource.instances}
       </text>
     );
@@ -160,7 +160,7 @@ export const GraphStage = memo(function GraphStage({ snapshot, visuals, cycle, c
                     className={`transition-colors duration-200 ${edgeClass(edge)}`}
                   />
                   {edge.count > 1 && (
-                    <text x={geo.mid.x} y={geo.mid.y - 4} textAnchor="middle" className="fill-fg-muted stroke-none font-mono text-[10px]">
+                    <text x={geo.mid.x} y={geo.mid.y - 4} textAnchor="middle" className="fill-fg-muted stroke-none font-mono text-2xs">
                       ×{edge.count}
                     </text>
                   )}
@@ -179,6 +179,7 @@ export const GraphStage = memo(function GraphStage({ snapshot, visuals, cycle, c
             <g
               key={resource.id}
               tabIndex={0}
+              role="img"
               aria-label={describeNode(resource.id, snapshot, visuals)}
               onMouseEnter={() => setFocused(resource.id)}
               onMouseLeave={() => setFocused(null)}
@@ -186,6 +187,18 @@ export const GraphStage = memo(function GraphStage({ snapshot, visuals, cycle, c
               onBlur={() => setFocused(null)}
               className="cursor-default outline-none"
             >
+              {/* The focus ring sits outside the square, so it stays visible when the square is red. */}
+              {focused === resource.id && (
+                <rect
+                  x={place.x - RESOURCE_HALF - 5}
+                  y={place.y - RESOURCE_HALF - 5}
+                  width={RESOURCE_HALF * 2 + 10}
+                  height={RESOURCE_HALF * 2 + 10}
+                  rx={4}
+                  className="fill-none stroke-fg-muted"
+                  strokeWidth={1.5}
+                />
+              )}
               <rect
                 x={place.x - RESOURCE_HALF}
                 y={place.y - RESOURCE_HALF}
@@ -195,11 +208,11 @@ export const GraphStage = memo(function GraphStage({ snapshot, visuals, cycle, c
                 strokeWidth={focused === resource.id ? 2.5 : 1.5}
                 className={`fill-surface-2 transition-colors duration-200 ${inCycle && cycleTone === 'deadlock' ? 'stroke-signal' : focused === resource.id ? 'stroke-fg' : 'stroke-line-strong'}`}
               />
-              <text x={place.x} y={place.y - 2} textAnchor="middle" className="fill-fg font-mono text-[12px] font-medium">
+              <text x={place.x} y={place.y - 2} textAnchor="middle" className="fill-fg font-mono text-xs font-medium">
                 {resource.id}
               </text>
               <ResourceDots resource={resource} held={held} x={place.x} y={place.y} />
-              <text x={place.x} y={place.y + RESOURCE_HALF + 14} textAnchor="middle" className="fill-fg-faint text-[11px]">
+              <text x={place.x} y={place.y + RESOURCE_HALF + 14} textAnchor="middle" className="fill-fg-faint text-2xs">
                 {resource.label}
               </text>
             </g>
@@ -214,6 +227,7 @@ export const GraphStage = memo(function GraphStage({ snapshot, visuals, cycle, c
             <g
               key={process.id}
               tabIndex={0}
+              role="img"
               aria-label={describeNode(process.id, snapshot, visuals)}
               onMouseEnter={() => setFocused(process.id)}
               onMouseLeave={() => setFocused(null)}
@@ -221,7 +235,7 @@ export const GraphStage = memo(function GraphStage({ snapshot, visuals, cycle, c
               onBlur={() => setFocused(null)}
               className="cursor-default outline-none"
             >
-              {focused === process.id && <circle cx={place.x} cy={place.y} r={PROCESS_RADIUS + 5} className="fill-none stroke-fg-faint" strokeWidth={1} />}
+              {focused === process.id && <circle cx={place.x} cy={place.y} r={PROCESS_RADIUS + 5} className="fill-none stroke-fg-muted" strokeWidth={1.5} />}
               <circle
                 cx={place.x}
                 cy={place.y}
@@ -240,14 +254,14 @@ export const GraphStage = memo(function GraphStage({ snapshot, visuals, cycle, c
                   strokeWidth={1.5}
                 />
               )}
-              <text x={place.x} y={place.y + 4} textAnchor="middle" className={`font-mono text-[12px] font-medium transition-colors duration-200 ${processText[visual]}`}>
+              <text x={place.x} y={place.y + 4} textAnchor="middle" className={`font-mono text-xs font-medium transition-colors duration-200 ${processText[visual]}`}>
                 {process.id}
               </text>
             </g>
           );
         })}
       </svg>
-      <p className="min-h-[2.5rem] border-t border-line px-4 py-2.5 text-xs leading-5 text-fg-muted">{detail}</p>
+      <p className="min-h-10 border-t border-line px-4 py-2.5 text-xs leading-5 text-fg-muted">{detail}</p>
     </div>
   );
 });

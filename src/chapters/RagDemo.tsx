@@ -9,7 +9,7 @@ import { OptionGroup } from '../components/ui/OptionGroup';
 import { Panel, PanelRow } from '../components/ui/Panel';
 import { circularWait } from '../scenarios/circularWait';
 import { cycleNoDeadlock } from '../scenarios/snapshots';
-import { ragChoices, type RagChoice } from '../content/demoText';
+import { ragChoices, uiText, type RagChoice } from '../content/demoText';
 import { isZero, row } from '../core/vector';
 
 /** The circular wait after it deadlocks. Every resource has one instance. */
@@ -36,7 +36,7 @@ function EdgeSet({ label, edges }: { readonly label: string; readonly edges: rea
   return (
     <div className="grid gap-x-4 gap-y-0.5 sm:grid-cols-[9rem_1fr]">
       <dt className="text-fg-faint">{label}</dt>
-      <dd className="font-mono text-fg-muted">{edges.length > 0 ? edges.join(', ') : '—'}</dd>
+      <dd className="font-mono text-fg-muted">{edges.length > 0 ? edges.join(', ') : uiText.noEdges}</dd>
     </div>
   );
 }

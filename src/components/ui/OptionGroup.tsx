@@ -33,7 +33,7 @@ export function OptionGroup<T extends string>({ label, options, value, onChange 
 
   return (
     <div>
-      <p className="mb-2 font-mono text-[11px] uppercase tracking-wider text-fg-faint">{label}</p>
+      <p className="mb-2 font-mono text-xs text-fg-faint">{label}</p>
       <div role="radiogroup" aria-label={label} className="flex flex-wrap gap-1.5">
         {options.map((option, i) => {
           const checked = option.value === value;
@@ -49,7 +49,7 @@ export function OptionGroup<T extends string>({ label, options, value, onChange 
               tabIndex={checked ? 0 : -1}
               onClick={() => onChange(option.value)}
               onKeyDown={(e) => onKeyDown(e, i)}
-              className={`rounded border px-2.5 py-1.5 text-[13px] leading-tight transition-colors duration-150 ${
+              className={`rounded border px-2.5 py-1.5 text-ui leading-tight transition-colors duration-150 coarse:min-h-11 coarse:min-w-11 ${
                 checked ? 'border-signal bg-signal-dim text-fg' : 'border-line text-fg-muted hover:border-line-strong hover:text-fg'
               }`}
             >

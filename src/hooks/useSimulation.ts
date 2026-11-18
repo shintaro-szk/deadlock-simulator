@@ -87,11 +87,11 @@ export interface UseSimulationOptions {
  * the display and stop when the tab is hidden.
  */
 export function useSimulation(scenario: Scenario, policy: Policy, options: UseSimulationOptions = {}): SimulationControls {
-  const [store, dispatch] = useReducer(reducer, undefined, () => ({
+  const [store, dispatch] = useReducer(reducer, undefined, (): SimStore => ({
     history: [createSim(scenario, policy)],
     index: 0,
     playing: false,
-    speed: 1 as Speed,
+    speed: 1,
   }));
 
   // Start again when the scenario or the policy changes. The first render already has the right
@@ -144,7 +144,7 @@ export function useSimulation(scenario: Scenario, policy: Policy, options: UseSi
     if (!options.keyboard) return;
     const onKey = (e: KeyboardEvent) => {
       if (e.metaKey || e.ctrlKey || e.altKey) return;
-      const target = e.target as HTMLElement | null;
+      const target = e.target instanceof HTMLElement ? e.target : null;
       const tag = target?.tagName;
       if (tag === 'INPUT' || tag === 'SELECT' || tag === 'TEXTAREA' || target?.isContentEditable) return;
       if (e.code === 'Space') {

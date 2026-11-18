@@ -34,7 +34,7 @@ export const MatrixTable = memo(function MatrixTable({ caption, resources, group
       <table className="w-full min-w-max border-collapse text-right font-mono text-xs tabular-nums">
         <caption className="sr-only">{caption}</caption>
         <thead>
-          <tr className="text-[10px] uppercase tracking-wider text-fg-faint">
+          <tr className="text-2xs text-fg-faint">
             <th scope="col" rowSpan={2} className="pb-1 pr-3 text-left align-bottom font-normal">
               Process
             </th>
@@ -45,7 +45,7 @@ export const MatrixTable = memo(function MatrixTable({ caption, resources, group
             ))}
             {showNote && <th rowSpan={2} className="pl-3" aria-hidden="true" />}
           </tr>
-          <tr className="border-b border-line text-[10px] text-fg-faint">
+          <tr className="border-b border-line text-2xs text-fg-faint">
             {groups.map((g) =>
               resources.map((r, i) => (
                 <th key={`${g}-${r.id}`} scope="col" className={`px-2 pb-1.5 font-normal ${i === 0 ? 'border-l border-line' : ''}`}>
@@ -68,7 +68,7 @@ export const MatrixTable = memo(function MatrixTable({ caption, resources, group
                   </td>
                 )),
               )}
-              {showNote && <td className="pl-3 text-left text-[11px]">{row.note}</td>}
+              {showNote && <td className="pl-3 text-left text-2xs">{row.note}</td>}
             </tr>
           ))}
         </tbody>

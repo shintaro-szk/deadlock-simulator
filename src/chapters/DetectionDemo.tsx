@@ -26,6 +26,7 @@ import {
   type DetectionMode,
   type DetectionView,
   type MatrixExample,
+  uiText,
 } from '../content/demoText';
 
 /** The periodic detector runs after every PERIOD-th step. */
@@ -86,7 +87,7 @@ function SingleInstance({ switcher, keyboard }: { readonly switcher: ReactNode; 
         <button
           type="button"
           onClick={detect}
-          className="flex h-9 items-center gap-1.5 rounded border border-line-strong px-3 text-sm text-fg transition-colors duration-150 hover:border-fg-muted"
+          className="flex h-9 coarse:h-11 items-center gap-1.5 rounded border border-line-strong px-3 text-sm text-fg transition-colors duration-150 hover:border-fg-muted"
         >
           <Search size={14} aria-hidden="true" /> Run detection
         </button>
@@ -97,13 +98,13 @@ function SingleInstance({ switcher, keyboard }: { readonly switcher: ReactNode; 
   const view = (
     <div>
       <div>
-        <p className="px-4 pt-3 font-mono text-[11px] uppercase tracking-wider text-fg-faint">Resource Allocation Graph</p>
+        <p className="px-4 pt-3 font-mono text-xs text-fg-faint">{uiText.ragCaption}</p>
         <GraphStage snapshot={snapshot} visuals={visuals} cycle={ragCycle} cycleTone="deadlock" description={`Resource Allocation Graph at step ${step}.`} />
       </div>
       <div className="border-t border-line">
-        <p className="px-4 pt-3 font-mono text-[11px] uppercase tracking-wider text-fg-faint">Wait-for Graph</p>
+        <p className="px-4 pt-3 font-mono text-xs text-fg-faint">{uiText.wfgCaption}</p>
         <WaitForGraph snapshot={snapshot} visuals={visuals} showCycle={found} />
-        <p className="border-t border-line px-4 py-2.5 text-xs leading-5 text-fg-muted">Each edge shows the resource that causes the wait.</p>
+        <p className="border-t border-line px-4 py-2.5 text-xs leading-5 text-fg-muted">{uiText.wfgNote}</p>
       </div>
     </div>
   );
@@ -191,7 +192,7 @@ function MultipleInstances({ switcher }: { readonly switcher: ReactNode }) {
             onClick={() => setIndex(Math.max(-1, index - 1))}
             disabled={index < 0}
             aria-label="Previous check"
-            className="grid h-9 w-9 place-items-center rounded border border-line text-fg-muted hover:border-line-strong hover:text-fg disabled:opacity-35"
+            className="grid h-9 w-9 coarse:h-11 coarse:w-11 place-items-center rounded border border-line text-fg-muted hover:border-line-strong hover:text-fg disabled:opacity-35"
           >
             <ChevronLeft size={16} aria-hidden="true" />
           </button>
@@ -199,7 +200,7 @@ function MultipleInstances({ switcher }: { readonly switcher: ReactNode }) {
             type="button"
             onClick={() => setIndex(Math.min(last, index + 1))}
             disabled={done}
-            className="flex h-9 items-center gap-1.5 rounded bg-signal-solid px-4 text-sm font-medium text-fg hover:bg-signal-solid-hover disabled:bg-surface-2 disabled:text-fg-faint"
+            className="flex h-9 coarse:h-11 items-center gap-1.5 rounded bg-signal-solid px-4 text-sm font-medium text-fg hover:bg-signal-solid-hover disabled:bg-surface-2 disabled:text-fg-faint"
           >
             Next check <ChevronRight size={16} aria-hidden="true" />
           </button>
@@ -207,7 +208,7 @@ function MultipleInstances({ switcher }: { readonly switcher: ReactNode }) {
             type="button"
             onClick={() => setIndex(last)}
             disabled={done}
-            className="h-9 rounded border border-line px-3 text-sm text-fg-muted hover:border-line-strong hover:text-fg disabled:opacity-35"
+            className="h-9 coarse:h-11 rounded border border-line px-3 text-sm text-fg-muted hover:border-line-strong hover:text-fg disabled:opacity-35"
           >
             Run to end
           </button>

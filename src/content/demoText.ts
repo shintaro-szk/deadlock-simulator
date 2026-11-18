@@ -150,3 +150,19 @@ export const criterionRule = {
   'resource-usage': 'Holds the most instances',
   'restart-cost': 'Cheapest to restart',
 } as const;
+
+/** Fixed labels and messages inside the demos. */
+export const uiText = {
+  ragCaption: 'Resource Allocation Graph',
+  wfgCaption: 'Wait-for Graph',
+  wfgNote: 'Each edge shows the resource that causes the wait.',
+  scriptsCaption: 'Scripts under this policy',
+  textbookRequests: 'Try the textbook requests',
+  requestLabel: 'Request',
+  safeSequence: 'Safe sequence:',
+  noEdges: 'none',
+  victimTableCaption: 'Victim selection values for the deadlocked processes',
+  demoErrorTitle: 'This demo stopped working.',
+  demoErrorBody: 'The chapter text is still correct. Try to load the demo again.',
+  demoErrorRetry: 'Load again',
+} as const;

@@ -18,10 +18,10 @@ function BrandMark() {
 /** Desktop: a fixed column on the left. */
 export function ChapterRail({ active }: ChapterRailProps) {
   return (
-    <nav aria-label="Chapters" className="sticky top-0 hidden h-screen w-60 shrink-0 flex-col border-r border-line px-6 py-8 lg:flex">
+    <nav aria-label="Chapters" className="sticky top-0 hidden h-dvh w-60 shrink-0 flex-col border-r border-line px-6 py-8 lg:flex">
       <a href="#top" className="mb-10 flex items-center gap-2.5">
         <BrandMark />
-        <span className="font-display text-[15px] font-semibold leading-tight text-fg">Deadlock Simulator</span>
+        <span className="font-display text-brand font-semibold leading-tight text-fg">{deck.title}</span>
       </a>
       <ol className="space-y-0.5">
         {chapters.map((c) => {
@@ -31,7 +31,7 @@ export function ChapterRail({ active }: ChapterRailProps) {
               <a
                 href={`#${c.id}`}
                 aria-current={isActive ? 'true' : undefined}
-                className={`group relative flex items-baseline gap-3 py-1.5 pl-3 text-sm transition-colors duration-150 ${
+                className={`group relative flex items-baseline gap-3 py-1.5 pl-3 text-sm transition-colors duration-150 coarse:min-h-11 coarse:items-center ${
                   isActive ? 'text-fg' : 'text-fg-faint hover:text-fg-muted'
                 }`}
               >
@@ -46,7 +46,7 @@ export function ChapterRail({ active }: ChapterRailProps) {
           );
         })}
       </ol>
-      <dl className="mt-auto space-y-1.5 font-mono text-[11px] text-fg-faint">
+      <dl className="mt-auto space-y-1.5 font-mono text-2xs text-fg-faint">
         <div className="flex justify-between"><dt>Play / pause</dt><dd className="text-fg-muted">Space</dd></div>
         <div className="flex justify-between"><dt>Step</dt><dd className="text-fg-muted">← →</dd></div>
         <div className="flex justify-between"><dt>Reset</dt><dd className="text-fg-muted">R</dd></div>
@@ -68,7 +68,7 @@ export function ChapterBar({ active }: ChapterRailProps) {
     <nav aria-label="Chapters" className="sticky top-0 z-20 border-b border-line bg-bg lg:hidden">
       <div className="flex items-center gap-2.5 px-4 pt-3">
         <BrandMark />
-        <span className="truncate font-display text-[15px] font-semibold text-fg">{deck.title}</span>
+        <span className="truncate font-display text-brand font-semibold text-fg">{deck.title}</span>
       </div>
       <ol ref={listRef} className="scrollbar-none flex gap-1 overflow-x-auto px-3 py-2">
         {chapters.map((c) => {
@@ -78,11 +78,11 @@ export function ChapterBar({ active }: ChapterRailProps) {
               <a
                 href={`#${c.id}`}
                 aria-current={isActive ? 'true' : undefined}
-                className={`flex items-baseline gap-1.5 rounded px-2.5 py-1.5 text-[13px] transition-colors duration-150 ${
+                className={`flex items-baseline gap-1.5 rounded px-2.5 py-1.5 text-ui coarse:min-h-11 coarse:items-center transition-colors duration-150 ${
                   isActive ? 'bg-surface-2 text-fg' : 'text-fg-faint'
                 }`}
               >
-                <span className={`font-mono text-[11px] ${isActive ? 'text-signal-strong' : ''}`}>{c.number}</span>
+                <span className={`font-mono text-2xs ${isActive ? 'text-signal-strong' : ''}`}>{c.number}</span>
                 {c.short}
               </a>
             </li>

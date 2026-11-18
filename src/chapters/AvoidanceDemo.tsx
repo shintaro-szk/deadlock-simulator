@@ -21,6 +21,7 @@ import {
   verdictTitle,
   type AvoidanceView,
   type LivePolicy,
+  uiText,
 } from '../content/demoText';
 
 const zero = (state: BankerState): Vector => Object.fromEntries(state.resources.map((r) => [r.id, 0]));
@@ -121,20 +122,20 @@ function RequestCheck({ switcher }: { readonly switcher: ReactNode }) {
         />
         <p className="mt-2 text-xs text-fg-muted">
           Current state: <span className={safety.safe ? 'text-ok' : 'text-signal-strong'}>{safety.safe ? 'safe' : 'unsafe'}</span>
-          {safety.safe && <span className="font-mono text-fg-faint"> · {safety.sequence.join(' → ')}</span>}
+          {safety.safe && <span className="font-mono text-fg-faint">. {uiText.safeSequence} {safety.sequence.join(' → ')}</span>}
         </p>
       </PanelRow>
       <PanelRow>
         <div className="space-y-4">
           <div>
-            <p className="mb-2 font-mono text-[11px] uppercase tracking-wider text-fg-faint">Try the textbook requests</p>
+            <p className="mb-2 font-mono text-xs text-fg-faint">{uiText.textbookRequests}</p>
             <div className="flex flex-wrap gap-1.5">
               {bankerPresets.map((preset) => (
                 <button
                   key={preset.process}
                   type="button"
                   onClick={() => choose(preset.process, preset.request)}
-                  className="rounded border border-line px-2.5 py-1 font-mono text-xs text-fg-muted transition-colors duration-150 hover:border-line-strong hover:text-fg"
+                  className="rounded border border-line px-2.5 py-1 font-mono text-xs text-fg-muted coarse:min-h-11 transition-colors duration-150 hover:border-line-strong hover:text-fg"
                 >
                   {preset.process} asks {formatVector(preset.request, state.resources)}
                 </button>
@@ -143,7 +144,7 @@ function RequestCheck({ switcher }: { readonly switcher: ReactNode }) {
           </div>
           <OptionGroup label="Process" options={processOptions} value={process} onChange={(p) => choose(p, zero(state))} />
           <div>
-            <p className="mb-2 font-mono text-[11px] uppercase tracking-wider text-fg-faint">Request</p>
+            <p className="mb-2 font-mono text-xs text-fg-faint">{uiText.requestLabel}</p>
             <div className="flex flex-wrap gap-x-5 gap-y-2">
               {state.resources.map((r) => (
                 <Stepper key={r.id} label={r.id} value={request[r.id] ?? 0} min={0} max={r.instances} onChange={(n) => setAmount(r.id, n)} />
@@ -155,7 +156,7 @@ function RequestCheck({ switcher }: { readonly switcher: ReactNode }) {
               type="button"
               onClick={check}
               disabled={empty}
-              className="h-9 rounded bg-signal-solid px-4 text-sm font-medium text-fg transition-colors duration-150 hover:bg-signal-solid-hover disabled:cursor-not-allowed disabled:bg-surface-2 disabled:text-fg-faint"
+              className="h-9 coarse:h-11 rounded bg-signal-solid px-4 text-sm font-medium text-fg transition-colors duration-150 hover:bg-signal-solid-hover disabled:cursor-not-allowed disabled:bg-surface-2 disabled:text-fg-faint"
             >
               Is it safe?
             </button>
@@ -163,14 +164,14 @@ function RequestCheck({ switcher }: { readonly switcher: ReactNode }) {
               type="button"
               onClick={undo}
               disabled={history.length < 2}
-              className="flex h-9 items-center gap-1.5 rounded border border-line px-3 text-sm text-fg-muted hover:border-line-strong hover:text-fg disabled:opacity-35"
+              className="flex h-9 coarse:h-11 items-center gap-1.5 rounded border border-line px-3 text-sm text-fg-muted hover:border-line-strong hover:text-fg disabled:opacity-35"
             >
               <Undo2 size={14} aria-hidden="true" /> Undo grant
             </button>
             <button
               type="button"
               onClick={reset}
-              className="flex h-9 items-center gap-1.5 rounded border border-line px-3 text-sm text-fg-muted hover:border-line-strong hover:text-fg"
+              className="flex h-9 coarse:h-11 items-center gap-1.5 rounded border border-line px-3 text-sm text-fg-muted hover:border-line-strong hover:text-fg"
             >
               <RotateCcw size={14} aria-hidden="true" /> Reset
             </button>

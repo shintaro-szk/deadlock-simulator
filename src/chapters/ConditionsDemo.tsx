@@ -12,8 +12,6 @@ import {
   type ConditionChoice,
 } from '../content/demoText';
 
-const conditionKeys = Object.keys(conditionNames) as (keyof typeof conditionNames)[];
-
 /** Chapter 02: break one condition and run the same circular wait again. */
 export default function ConditionsDemo() {
   const [choice, setChoice] = useState<ConditionChoice>('all');
@@ -23,12 +21,12 @@ export default function ConditionsDemo() {
     <div className="space-y-3">
       <OptionGroup label="Break one condition" options={conditionChoices} value={choice} onChange={setChoice} />
       <ul className="grid grid-cols-2 gap-x-4 gap-y-1 sm:grid-cols-4" aria-label="Condition state">
-        {conditionKeys.map((key) => {
+        {Object.entries(conditionNames).map(([key, name]) => {
           const broken = key === choice;
           return (
             <li key={key} className="flex items-baseline gap-2 text-xs">
               <span aria-hidden="true" className={`inline-block h-1.5 w-1.5 shrink-0 ${broken ? 'bg-fg-faint' : 'bg-signal'}`} />
-              <span className={broken ? 'text-fg-faint line-through' : 'text-fg-muted'}>{conditionNames[key]}</span>
+              <span className={broken ? 'text-fg-faint line-through' : 'text-fg-muted'}>{name}</span>
               <span className="sr-only">{broken ? 'broken' : 'holds'}</span>
             </li>
           );

@@ -24,7 +24,7 @@ function IconButton({
       disabled={disabled}
       aria-label={label}
       title={label}
-      className="grid h-9 w-9 place-items-center rounded border border-line text-fg-muted transition-colors duration-150 hover:border-line-strong hover:text-fg disabled:cursor-not-allowed disabled:opacity-35 disabled:hover:border-line disabled:hover:text-fg-muted"
+      className="grid h-9 w-9 place-items-center rounded coarse:h-11 coarse:w-11 border border-line text-fg-muted transition-colors duration-150 hover:border-line-strong hover:text-fg disabled:cursor-not-allowed disabled:opacity-35 disabled:hover:border-line disabled:hover:text-fg-muted"
     >
       {children}
     </button>
@@ -48,7 +48,7 @@ export function Transport({ sim }: TransportProps) {
           onClick={sim.toggle}
           disabled={ended && !sim.playing}
           aria-label={sim.playing ? 'Pause (Space)' : 'Play (Space)'}
-          className="flex h-9 min-w-[6.5rem] items-center justify-center gap-2 rounded bg-signal-solid px-4 font-medium text-fg transition-colors duration-150 hover:bg-signal-solid-hover disabled:cursor-not-allowed disabled:bg-surface-2 disabled:text-fg-faint"
+          className="flex h-9 min-w-step items-center coarse:h-11 justify-center gap-2 rounded bg-signal-solid px-4 font-medium text-fg transition-colors duration-150 hover:bg-signal-solid-hover disabled:cursor-not-allowed disabled:bg-surface-2 disabled:text-fg-faint"
         >
           {sim.playing ? <Pause size={16} aria-hidden="true" /> : <Play size={16} aria-hidden="true" />}
           <span>{sim.playing ? 'Pause' : 'Play'}</span>
@@ -65,7 +65,7 @@ export function Transport({ sim }: TransportProps) {
             type="button"
             aria-pressed={sim.speed === speed}
             onClick={() => sim.setSpeed(speed)}
-            className={`rounded-sm px-2 py-1 font-mono text-xs transition-colors duration-150 ${
+            className={`rounded-sm px-2 py-1 font-mono text-xs transition-colors coarse:min-h-11 coarse:min-w-11 duration-150 ${
               sim.speed === speed ? 'bg-surface-2 text-fg' : 'text-fg-faint hover:text-fg-muted'
             }`}
           >
@@ -74,7 +74,7 @@ export function Transport({ sim }: TransportProps) {
         ))}
       </div>
 
-      <p className="ml-auto font-mono text-xs uppercase tracking-wider text-fg-faint">
+      <p className="ml-auto font-mono text-xs text-fg-faint">
         Step <span className="text-fg tabular-nums">{String(sim.state.step).padStart(2, '0')}</span>
       </p>
     </div>

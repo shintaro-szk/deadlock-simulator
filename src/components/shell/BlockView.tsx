@@ -7,8 +7,8 @@ const toneClass = { downside: 'text-signal-strong', works: 'text-ok', fails: 'te
 
 function PointItem({ point }: { readonly point: Point }) {
   const label = point.label ?? (point.tone ? toneLabel[point.tone] : undefined);
-  // Tone labels are short tags, so they use capitals. Other labels can hold formulas such as "Pi → Rj".
-  const labelClass = point.tone ? `${toneClass[point.tone]} text-xs uppercase tracking-wider` : 'text-sm text-fg';
+  // Tone labels are short tags, so they are one step smaller. Other labels can hold formulas such as "Pi → Rj".
+  const labelClass = point.tone ? `${toneClass[point.tone]} text-xs` : 'text-sm text-fg';
   return (
     <>
       {label && <span className={`font-mono leading-6 ${labelClass}`}>{label}</span>}
@@ -38,7 +38,7 @@ function PointList({ items, ordered }: { readonly items: readonly Point[]; reado
 function Example({ text }: { readonly text: string }) {
   return (
     <p className="border-l-2 border-signal py-0.5 pl-4 text-fg">
-      <span className="mr-2 font-mono text-xs uppercase tracking-wider text-fg-faint">Example</span>
+      <span className="mr-2 font-mono text-xs text-fg-faint">Example</span>
       {text}
     </p>
   );
@@ -60,7 +60,7 @@ export function BlockView({ block }: { readonly block: Block }) {
     case 'list':
       return (
         <div className="space-y-3">
-          {block.title && <h3 className="font-mono text-xs uppercase tracking-wider text-fg-faint">{block.title}</h3>}
+          {block.title && <h3 className="font-mono text-xs text-fg-faint">{block.title}</h3>}
           <PointList items={block.items} ordered={block.ordered} />
         </div>
       );
@@ -80,7 +80,7 @@ export function BlockView({ block }: { readonly block: Block }) {
     case 'approaches':
       return (
         <div className="space-y-3">
-          <h3 className="font-mono text-xs uppercase tracking-wider text-fg-faint">Approaches in handling deadlock</h3>
+          <h3 className="font-mono text-xs text-fg-faint">{block.title}</h3>
           <div className="grid border border-line sm:grid-cols-2">
             {block.columns.map((column, ci) => (
               <div key={column.title} className={`p-4 ${ci > 0 ? 'border-t border-line sm:border-l sm:border-t-0' : ''}`}>
@@ -90,7 +90,7 @@ export function BlockView({ block }: { readonly block: Block }) {
                     const target = chapters.find((c) => c.id === group.chapter);
                     return (
                       <div key={group.title}>
-                        <a href={`#${group.chapter}`} className="group inline-flex items-baseline gap-2 text-sm text-fg hover:text-signal-strong">
+                        <a href={`#${group.chapter}`} className="group inline-flex items-baseline gap-2 text-sm text-fg hover:text-signal-strong coarse:min-h-11 coarse:items-center">
                           <span className="font-mono text-xs text-signal-strong">{target?.number}</span>
                           <span className="underline decoration-line underline-offset-4 group-hover:decoration-signal">{group.title}</span>
                         </a>
@@ -113,7 +113,7 @@ export function BlockView({ block }: { readonly block: Block }) {
         <div className="space-y-10">
           {block.groups.map((group) => (
             <div key={group.title} className="space-y-3">
-              <h3 className="font-mono text-xs uppercase tracking-wider text-fg-faint">{group.title}</h3>
+              <h3 className="font-mono text-xs text-fg-faint">{group.title}</h3>
               <ul className="divide-y divide-line border-y border-line">
                 {group.items.map((ref) => (
                   <li key={ref.title} className="py-4">
@@ -124,7 +124,7 @@ export function BlockView({ block }: { readonly block: Block }) {
                         href={ref.href}
                         target="_blank"
                         rel="noreferrer"
-                        className="mt-2 inline-flex items-center gap-1 font-mono text-xs text-signal-strong hover:underline"
+                        className="mt-2 inline-flex items-center gap-1 font-mono text-xs text-signal-strong hover:underline coarse:min-h-11"
                       >
                         {ref.href.replace('https://', '')}
                         <ArrowUpRight size={12} aria-hidden="true" />

@@ -12,7 +12,7 @@ export function Panel({ kind, title, children }: PanelProps) {
   return (
     <figure className="overflow-hidden rounded-lg border border-line bg-surface" aria-label={`${kind}: ${title}`}>
       <figcaption className="flex items-center justify-between gap-4 border-b border-line px-4 py-2.5">
-        <span className="font-mono text-[11px] uppercase tracking-wider text-fg-faint">{kind}</span>
+        <span className="font-mono text-xs text-fg-faint">{kind}</span>
         <span className="truncate font-mono text-xs text-fg-muted">{title}</span>
       </figcaption>
       <div className="divide-y divide-line">{children}</div>

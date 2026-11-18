@@ -36,7 +36,7 @@ export type Block =
       readonly ordered?: boolean;
       readonly example?: string;
     }
-  | { readonly kind: 'approaches'; readonly columns: readonly ApproachColumn[] }
+  | { readonly kind: 'approaches'; readonly title: string; readonly columns: readonly ApproachColumn[] }
   | { readonly kind: 'references'; readonly groups: readonly ReferenceGroup[] };
 
 export interface ApproachColumn {
@@ -168,6 +168,7 @@ export const chapters: readonly Chapter[] = [
       },
       {
         kind: 'approaches',
+        title: 'Approaches in handling deadlock',
         columns: [
           {
             title: 'Prevention and avoidance',
@@ -455,13 +456,13 @@ export const chapters: readonly Chapter[] = [
                 title: 'Operating System Concepts (Silberschatz, Galvin, and Gagne)',
                 detail: "Textbook definitions of mutual exclusion, hold and wait, RAGs, and the Banker's Algorithm.",
               },
-              { title: 'Yale University CS — Chapter 7: Deadlocks', detail: 'Course chapter on deadlocks.' },
+              { title: 'Yale University CS - Chapter 7: Deadlocks', detail: 'Course chapter on deadlocks.' },
               {
-                title: 'University of Virginia CS3130 — Deadlock',
+                title: 'University of Virginia CS3130 - Deadlock',
                 detail: 'The four necessary deadlock conditions, first defined by E. G. Coffman in 1971.',
               },
               {
-                title: 'TutorialsPoint — Operating System Resource Allocation Graph',
+                title: 'TutorialsPoint - Operating System Resource Allocation Graph',
                 detail: 'Single-instance and multi-instance RAGs, and how cycles translate to deadlock states.',
               },
             ],

@@ -1,7 +1,7 @@
 /** Key for the RAG symbols. Shapes and line styles carry the meaning, not only colour. */
 export function GraphLegend({ showWarning = false }: { readonly showWarning?: boolean }) {
   return (
-    <ul className="flex flex-wrap gap-x-5 gap-y-2 px-4 py-2.5 text-[11px] text-fg-muted" aria-label="Graph key">
+    <ul className="flex flex-wrap gap-x-5 gap-y-2 px-4 py-2.5 text-2xs text-fg-muted" aria-label="Graph key">
       <li className="flex items-center gap-2">
         <svg width="14" height="14" aria-hidden="true"><circle cx="7" cy="7" r="5.5" className="fill-surface-2 stroke-fg" strokeWidth="1.5" /></svg>
         Process

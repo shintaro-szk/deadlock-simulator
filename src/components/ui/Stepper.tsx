@@ -11,7 +11,7 @@ interface StepperProps {
 /** A whole-number input with − and + buttons. */
 export function Stepper({ label, value, min, max, onChange }: StepperProps) {
   const set = (next: number) => onChange(Math.min(max, Math.max(min, next)));
-  const button = 'grid h-8 w-8 place-items-center text-fg-muted transition-colors duration-150 hover:text-fg disabled:opacity-30';
+  const button = 'grid h-8 w-8 place-items-center coarse:h-11 coarse:w-11 text-fg-muted transition-colors duration-150 hover:text-fg disabled:opacity-30';
   return (
     <div className="flex items-center gap-2">
       <span className="w-4 font-mono text-xs text-fg-faint">{label}</span>

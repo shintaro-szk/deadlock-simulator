@@ -20,7 +20,7 @@ export function ChapterSection({ chapter, demo }: ChapterSectionProps) {
         </h2>
       </header>
       <div className={demo ? 'grid gap-10 xl:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] xl:gap-12' : ''}>
-        <div className="max-w-[64ch] space-y-7">
+        <div className="max-w-prose space-y-7">
           {chapter.blocks.map((block, i) => (
             <BlockView key={i} block={block} />
           ))}

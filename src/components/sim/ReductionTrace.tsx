@@ -27,7 +27,7 @@ export const ReductionTrace = memo(function ReductionTrace({ trace, resources, d
   }, [shown.length]);
 
   return (
-    <ol ref={listRef} aria-label="Algorithm steps" tabIndex={0} className="max-h-56 space-y-0.5 overflow-y-auto overscroll-contain font-mono text-[11px] leading-5">
+    <ol ref={listRef} aria-label="Algorithm steps" tabIndex={0} className="max-h-56 space-y-0.5 overflow-y-auto overscroll-contain font-mono text-2xs leading-5">
       {shown.map((check, i) => {
         const current = upTo !== undefined && i === upTo;
         const newPass = i > 0 && trace[i - 1].pass !== check.pass;

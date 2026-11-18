@@ -48,6 +48,28 @@ export default {
         md: '3px',
         lg: '4px',
       },
+      // Sizes outside the default scale. 11px is the floor for dense mono data (tables, logs, graph labels).
+      fontSize: {
+        '2xs': '11px',
+        ui: '13px',
+        brand: '15px',
+      },
+      lineHeight: {
+        display: '1.05',
+      },
+      maxWidth: {
+        page: '78rem',
+      },
+      minHeight: {
+        stage: '28rem',
+      },
+      minWidth: {
+        step: '6.5rem',
+      },
+      // Touch screens. Controls get a 44px minimum target here; mouse layouts stay compact.
+      screens: {
+        coarse: { raw: '(pointer: coarse)' },
+      },
     },
   },
   plugins: [],

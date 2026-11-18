@@ -1,6 +1,7 @@
 import { memo } from 'react';
 import type { Op, ResourceSpec, SimState } from '../../core/model';
 import { formatItems } from '../../content/simText';
+import { uiText } from '../../content/demoText';
 
 function opText(op: Op, resources: readonly ResourceSpec[]): string {
   if (op.kind === 'work') return 'work';
@@ -14,7 +15,7 @@ function opText(op: Op, resources: readonly ResourceSpec[]): string {
 export const ScriptView = memo(function ScriptView({ state }: { readonly state: SimState }) {
   return (
     <div>
-      <p className="mb-2 font-mono text-[11px] uppercase tracking-wider text-fg-faint">Scripts under this policy</p>
+      <p className="mb-2 font-mono text-xs text-fg-faint">{uiText.scriptsCaption}</p>
       <ul className="space-y-1.5">
         {state.processes.map((p) => {
           const pc = state.pc[p.id];
@@ -29,7 +30,7 @@ export const ScriptView = memo(function ScriptView({ state }: { readonly state: 
                     <li
                       key={i}
                       aria-current={state_ === 'next' ? 'step' : undefined}
-                      className={`rounded-sm border px-1.5 py-0.5 font-mono text-[11px] transition-colors duration-200 ${
+                      className={`rounded-sm border px-1.5 py-0.5 font-mono text-2xs transition-colors duration-200 ${
                         state_ === 'next'
                           ? 'border-fg-muted text-fg'
                           : state_ === 'done'

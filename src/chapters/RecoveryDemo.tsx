@@ -14,6 +14,7 @@ import {
   recoveryMethods,
   recoveryNote,
   type RecoveryMethod,
+  uiText,
 } from '../content/demoText';
 
 function recover(state: SimState, method: RecoveryMethod, criterion: VictimCriterion) {
@@ -52,9 +53,9 @@ function CandidateTable({ state, candidates, victim, criterion }: {
   ];
   return (
     <table className="w-full border-collapse text-right font-mono text-xs tabular-nums">
-      <caption className="sr-only">Victim selection values for the deadlocked processes</caption>
+      <caption className="sr-only">{uiText.victimTableCaption}</caption>
       <thead>
-        <tr className="border-b border-line text-[10px] uppercase tracking-wider text-fg-faint">
+        <tr className="border-b border-line text-2xs text-fg-faint">
           <th scope="col" className="pb-1.5 pr-3 text-left font-normal">Process</th>
           {columns.map((c) => (
             <th key={c.key} scope="col" className={`px-2 pb-1.5 font-normal ${c.key === criterion ? 'text-signal-strong' : ''}`}>
@@ -73,7 +74,7 @@ function CandidateTable({ state, candidates, victim, criterion }: {
                 {c.value(id)}
               </td>
             ))}
-            <td className="pl-3 text-left text-[11px] text-signal-strong">{id === victim ? 'victim' : ''}</td>
+            <td className="pl-3 text-left text-2xs text-signal-strong">{id === victim ? 'victim' : ''}</td>
           </tr>
         ))}
       </tbody>
@@ -125,7 +126,7 @@ export default function RecoveryDemo() {
           <button
             type="button"
             onClick={doRecover}
-            className="h-9 rounded bg-signal-solid px-4 text-sm font-medium text-fg transition-colors duration-150 hover:bg-signal-solid-hover"
+            className="h-9 coarse:h-11 rounded bg-signal-solid px-4 text-sm font-medium text-fg transition-colors duration-150 hover:bg-signal-solid-hover"
           >
             Recover now
           </button>
@@ -134,7 +135,7 @@ export default function RecoveryDemo() {
             <button
               type="button"
               onClick={toDeadlock}
-              className="h-9 rounded border border-line-strong px-3 text-sm text-fg transition-colors duration-150 hover:border-fg-muted"
+              className="h-9 coarse:h-11 rounded border border-line-strong px-3 text-sm text-fg transition-colors duration-150 hover:border-fg-muted"
             >
               Run to deadlock
             </button>

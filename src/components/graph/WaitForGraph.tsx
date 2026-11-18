@@ -60,7 +60,7 @@ export const WaitForGraph = memo(function WaitForGraph({ snapshot, visuals, show
                   markerEnd={`url(#${uid}-${isCycle ? 'cycle' : 'wait'})`}
                   className={`transition-colors duration-200 ${isCycle ? 'edge-cycle stroke-signal' : 'stroke-fg-muted'}`}
                 />
-                <text x={geo.mid.x} y={geo.mid.y - 5} textAnchor="middle" className="fill-fg-faint stroke-none font-mono text-[10px]">
+                <text x={geo.mid.x} y={geo.mid.y - 5} textAnchor="middle" className="fill-fg-faint stroke-none font-mono text-2xs">
                   {edge.via.join(', ')}
                 </text>
               </g>
@@ -75,7 +75,7 @@ export const WaitForGraph = memo(function WaitForGraph({ snapshot, visuals, show
           return (
             <g key={p.id}>
               <circle cx={place.x} cy={place.y} r={PROCESS_RADIUS} strokeWidth={1.5} className={`transition-colors duration-200 ${nodeClass[shown]}`} />
-              <text x={place.x} y={place.y + 4} textAnchor="middle" className="fill-fg font-mono text-[12px] font-medium">
+              <text x={place.x} y={place.y + 4} textAnchor="middle" className="fill-fg font-mono text-xs font-medium">
                 {p.id}
               </text>
             </g>
