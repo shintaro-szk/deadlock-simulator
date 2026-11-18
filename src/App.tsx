@@ -10,6 +10,9 @@ const ConceptDemo = lazy(() => import('./chapters/ConceptDemo'));
 const ConditionsDemo = lazy(() => import('./chapters/ConditionsDemo'));
 const RagDemo = lazy(() => import('./chapters/RagDemo'));
 const PreventionDemo = lazy(() => import('./chapters/PreventionDemo'));
+const AvoidanceDemo = lazy(() => import('./chapters/AvoidanceDemo'));
+const DetectionDemo = lazy(() => import('./chapters/DetectionDemo'));
+const RecoveryDemo = lazy(() => import('./chapters/RecoveryDemo'));
 
 const withFallback = (node: ReactNode) => (
   <DemoBoundary>
@@ -22,6 +25,9 @@ const demos: Partial<Record<ChapterId, ReactNode>> = {
   conditions: withFallback(<ConditionsDemo />),
   rag: withFallback(<RagDemo />),
   prevention: withFallback(<PreventionDemo />),
+  avoidance: withFallback(<AvoidanceDemo />),
+  detection: withFallback(<DetectionDemo />),
+  recovery: withFallback(<RecoveryDemo />),
 };
 
 export default function App() {

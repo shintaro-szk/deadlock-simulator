@@ -73,3 +73,80 @@ export const ragChoices: readonly { readonly value: RagChoice; readonly label: s
   { value: 'single', label: 'Single instance' },
   { value: 'multiple', label: 'Multiple instances' },
 ];
+
+export type AvoidanceView = 'check' | 'live';
+
+export const avoidanceViews: readonly { readonly value: AvoidanceView; readonly label: string }[] = [
+  { value: 'check', label: 'Check a request' },
+  { value: 'live', label: 'Live run' },
+];
+
+export type LivePolicy = 'none' | 'banker';
+
+export const livePolicies: readonly { readonly value: LivePolicy; readonly label: string }[] = [
+  { value: 'none', label: 'No avoidance' },
+  { value: 'banker', label: "Banker's Algorithm" },
+];
+
+export const livePolicyNote: Record<LivePolicy, string> = {
+  none: 'The OS grants every request that is free. P2 gets one more block too early, and the system deadlocks.',
+  banker: "The OS checks each request first. When P2 asks for one more block, the result is unsafe, so P2 waits. Every process finishes.",
+};
+
+export const verdictTitle = {
+  granted: 'Safe → granted',
+  unsafe: 'Unsafe → denied for now',
+  'must-wait': 'Not free → the process must wait',
+  'exceeds-claim': 'Error → more than the declared need',
+} as const;
+
+export type DetectionView = 'single' | 'multiple';
+
+export const detectionViews: readonly { readonly value: DetectionView; readonly label: string }[] = [
+  { value: 'single', label: 'Single instance (RAG, WFG)' },
+  { value: 'multiple', label: 'Multiple instances (tables)' },
+];
+
+export type DetectionMode = 'periodic' | 'on-demand';
+
+export const detectionModes: readonly { readonly value: DetectionMode; readonly label: string }[] = [
+  { value: 'periodic', label: 'Periodic (every 2 steps)' },
+  { value: 'on-demand', label: 'On demand' },
+];
+
+export type MatrixExample = 'pdf' | 'deadlock';
+
+export const matrixExamples: readonly { readonly value: MatrixExample; readonly label: string }[] = [
+  { value: 'pdf', label: 'PDF example' },
+  { value: 'deadlock', label: 'Deadlocked system' },
+];
+
+export type RecoveryMethod = 'terminate-one' | 'terminate-all' | 'rollback' | 'preempt';
+
+export const recoveryMethods: readonly { readonly value: RecoveryMethod; readonly label: string }[] = [
+  { value: 'terminate-one', label: 'Kill one at a time' },
+  { value: 'terminate-all', label: 'Kill all' },
+  { value: 'rollback', label: 'Rollback' },
+  { value: 'preempt', label: 'Preempt resources' },
+];
+
+export const recoveryNote: Record<RecoveryMethod, string> = {
+  'terminate-one': 'Kill the selected victim. If the cycle still exists, kill the next one, until the cycle breaks.',
+  'terminate-all': 'Kill every process in the cycle at once. The deadlock ends, but all their work is lost.',
+  rollback: 'Send the victim back to its last checkpoint, where it held nothing. It releases its resources and runs again from there.',
+  preempt: 'Take the resources from the victim and give them to the waiting processes now. The victim restarts. If the same process is the victim again and again, it starves.',
+};
+
+export const criterionChoices: readonly { readonly value: 'priority' | 'execution-time' | 'resource-usage' | 'restart-cost'; readonly label: string }[] = [
+  { value: 'priority', label: 'Priority' },
+  { value: 'execution-time', label: 'Execution time' },
+  { value: 'resource-usage', label: 'Resource usage' },
+  { value: 'restart-cost', label: 'Restart cost' },
+];
+
+export const criterionRule = {
+  priority: 'Lowest priority',
+  'execution-time': 'Fewest steps run (least work lost)',
+  'resource-usage': 'Holds the most instances',
+  'restart-cost': 'Cheapest to restart',
+} as const;

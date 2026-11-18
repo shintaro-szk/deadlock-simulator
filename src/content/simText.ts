@@ -73,3 +73,9 @@ export const policyText: Record<Policy, string> = {
   'resource-ordering': 'Eliminate circular wait (resource order)',
   banker: "Banker's Algorithm",
 };
+
+/** Write a vector as a tuple in resource order: "(1, 0, 2)". A single resource type gives a plain number. */
+export function formatVector(vector: Vector, resources: readonly ResourceSpec[]): string {
+  const values = resources.map((r) => vector[r.id] ?? 0);
+  return values.length === 1 ? String(values[0]) : `(${values.join(', ')})`;
+}

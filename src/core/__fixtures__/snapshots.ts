@@ -40,26 +40,8 @@ export const empty: AllocationSnapshot = { processes: [], resources: [], allocat
 /** The app shows these two PDF examples, so they live in src/scenarios. */
 export { multiInstanceDetection as pdfMultiInstance, cycleNoDeadlock as cycleWithoutDeadlock } from '../../scenarios/snapshots';
 
-/** Textbook Banker's example (Silberschatz et al., listed in the PDF references). Safe state. */
-export const textbookBanker: BankerState = {
-  processes: processes('P0', 'P1', 'P2', 'P3', 'P4'),
-  resources: resources(['A', 10], ['B', 5], ['C', 7]),
-  allocation: {
-    P0: { A: 0, B: 1, C: 0 },
-    P1: { A: 2, B: 0, C: 0 },
-    P2: { A: 3, B: 0, C: 2 },
-    P3: { A: 2, B: 1, C: 1 },
-    P4: { A: 0, B: 0, C: 2 },
-  },
-  max: {
-    P0: { A: 7, B: 5, C: 3 },
-    P1: { A: 3, B: 2, C: 2 },
-    P2: { A: 9, B: 0, C: 2 },
-    P3: { A: 2, B: 2, C: 2 },
-    P4: { A: 4, B: 3, C: 3 },
-  },
-  available: { A: 3, B: 3, C: 2 },
-};
+/** Textbook Banker's example (Silberschatz et al., listed in the PDF references). Safe state. The app shows it too. */
+export { bankerTable as textbookBanker } from '../../scenarios/bankerTable';
 
 /** Old regression case: an unsafe state. P1 and P2 both need more than is available. */
 export const unsafeBanker: BankerState = {

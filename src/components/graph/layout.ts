@@ -39,8 +39,9 @@ export function ringLayout(
 
   const cx = width / 2;
   const cy = height / 2;
-  // Keep space for the labels outside the nodes.
-  const rx = Math.max(40, width / 2 - 72);
+  // Keep space for the nodes and their labels. Narrow stages use a smaller margin.
+  const marginX = Math.min(72, Math.max(40, width * 0.14));
+  const rx = Math.max(40, width / 2 - marginX);
   const ry = Math.max(40, height / 2 - 50);
 
   const out = new Map<string, NodePlacement>();

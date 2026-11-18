@@ -21,13 +21,19 @@ interface SimPanelProps {
   readonly controls?: ReactNode;
   /** Extra rows under the process table, for example the scripts. */
   readonly footer?: ReactNode;
+  /** Replace the default graph, for example with the RAG and the WFG side by side. */
+  readonly view?: ReactNode;
+  /** Replace the default status line, for example with the detector result. */
+  readonly status?: ReactNode;
+  /** False hides the deadlock marks in the table and graph until a detector finds the deadlock. */
+  readonly revealDeadlock?: boolean;
 }
 
 /** A live simulation: controls, status, Resource Allocation Graph, process table, and step log. */
-export function SimPanel({ sim, title, controls, footer }: SimPanelProps) {
+export function SimPanel({ sim, title, controls, footer, view, status, revealDeadlock = true }: SimPanelProps) {
   const snapshot = useMemo(() => toSnapshot(sim.state), [sim.state]);
   const analysis = useMemo(() => analyzeState(snapshot), [snapshot]);
-  const deadlocked = sim.state.outcome === 'deadlocked' ? analysis.deadlocked : NONE;
+  const deadlocked = revealDeadlock && sim.state.outcome === 'deadlocked' ? analysis.deadlocked : NONE;
   const visuals = useMemo(() => simVisuals(sim.state, deadlocked), [sim.state, deadlocked]);
   // Show the cycle only while it is a deadlock. A passing cycle with free instances is not a problem here.
   const cycle = sim.state.outcome === 'deadlocked' ? analysis.cycle : null;
@@ -38,21 +44,25 @@ export function SimPanel({ sim, title, controls, footer }: SimPanelProps) {
       <PanelRow>
         <Transport sim={sim} />
       </PanelRow>
-      <PanelRow className={`transition-colors duration-200 ${sim.state.outcome === 'deadlocked' ? 'bg-signal-dim/40' : ''}`}>
-        <StatusLine state={sim.state} deadlocked={deadlocked} />
-      </PanelRow>
-      <div>
-        <GraphStage
-          snapshot={snapshot}
-          visuals={visuals}
-          cycle={cycle}
-          cycleTone="deadlock"
-          description={`Resource Allocation Graph for ${title}, step ${sim.state.step}.`}
-        />
-        <div className="border-t border-line">
-          <GraphLegend />
+      {status ?? (
+        <PanelRow className={`transition-colors duration-200 ${sim.state.outcome === 'deadlocked' ? 'bg-signal-dim/40' : ''}`}>
+          <StatusLine state={sim.state} deadlocked={deadlocked} />
+        </PanelRow>
+      )}
+      {view ?? (
+        <div>
+          <GraphStage
+            snapshot={snapshot}
+            visuals={visuals}
+            cycle={cycle}
+            cycleTone="deadlock"
+            description={`Resource Allocation Graph for ${title}, step ${sim.state.step}.`}
+          />
+          <div className="border-t border-line">
+            <GraphLegend />
+          </div>
         </div>
-      </div>
+      )}
       <PanelRow className="py-1">
         <ProcessTable state={sim.state} deadlocked={deadlocked} />
       </PanelRow>
