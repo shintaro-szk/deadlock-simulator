@@ -10,7 +10,6 @@ dist/
 .env
 .env.local
 
-# AI agent files (AGENTS.md Section 10)
 **/SKILL.md
 CLAUDE.md
 CLAUDE.local.md
