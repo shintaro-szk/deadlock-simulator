@@ -37,28 +37,8 @@ export const noCycle: AllocationSnapshot = {
 
 export const empty: AllocationSnapshot = { processes: [], resources: [], allocation: {}, request: {} };
 
-/**
- * PDF (Detection in Multiple-instance Resources):
- * "P1 needs 2 more, but only 1 is free → can't finish. P2 can finish with what's free → releases resources.
- * After P2 finishes, P1 now has enough → system is safe."
- */
-export const pdfMultiInstance: AllocationSnapshot = {
-  processes: processes('P1', 'P2'),
-  resources: resources(['R1', 3]),
-  allocation: { P1: { R1: 1 }, P2: { R1: 1 } },
-  request: { P1: { R1: 2 }, P2: { R1: 1 } },
-};
-
-/**
- * PDF (Characterization): with multiple instances, a cycle is necessary but not sufficient.
- * Cycle P1 → R1 → P3 → R2 → P1, but P2 and P4 can finish and free the instances.
- */
-export const cycleWithoutDeadlock: AllocationSnapshot = {
-  processes: processes('P1', 'P2', 'P3', 'P4'),
-  resources: resources(['R1', 2], ['R2', 2]),
-  allocation: { P1: { R2: 1 }, P2: { R1: 1 }, P3: { R1: 1 }, P4: { R2: 1 } },
-  request: { P1: { R1: 1 }, P3: { R2: 1 } },
-};
+/** The app shows these two PDF examples, so they live in src/scenarios. */
+export { multiInstanceDetection as pdfMultiInstance, cycleNoDeadlock as cycleWithoutDeadlock } from '../../scenarios/snapshots';
 
 /** Textbook Banker's example (Silberschatz et al., listed in the PDF references). Safe state. */
 export const textbookBanker: BankerState = {
