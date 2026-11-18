@@ -16,14 +16,17 @@ function detail(state: SimState, deadlocked: readonly ProcessId[]): string {
   return last ? `${last.process} ${describeLogEntry(last, state.resources).text}.` : 'Press Play or step forward.';
 }
 
-/** The outcome of the run in one line. Screen readers announce changes. */
+/** The outcome of the run in one line. Screen readers announce a change of outcome. */
 export const StatusLine = memo(function StatusLine({ state, deadlocked }: StatusLineProps) {
   const outcome = outcomeText[state.outcome];
   return (
     <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-      <p role="status" aria-live="polite" className="flex min-w-0 items-baseline gap-2.5">
+      <p className="flex min-w-0 items-baseline gap-2.5">
         <span aria-hidden="true" className={`inline-block h-2 w-2 shrink-0 translate-y-[-1px] ${toneFill[outcome.tone]}`} />
-        <span className={`font-display text-lg font-semibold ${toneText[outcome.tone]}`}>{outcome.label}</span>
+        {/* Only the outcome is a live region. The detail changes on every step and would flood a screen reader. */}
+        <span role="status" className={`font-display text-lg font-semibold ${toneText[outcome.tone]}`}>
+          {outcome.label}
+        </span>
         <span className="text-sm text-fg-muted">{detail(state, deadlocked)}</span>
       </p>
       <p className="font-mono text-xs text-fg-faint">{policyText[state.policy]}</p>

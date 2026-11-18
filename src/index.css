@@ -17,11 +17,14 @@
 
   --fg: 242 238 236;
   --fg-muted: 168 160 156;
-  --fg-faint: 120 113 110;
+  --fg-faint: 140 132 128;
 
   --signal: 230 36 41;
   --signal-strong: 255 66 66;
   --signal-dim: 64 14 16;
+  /* Fill for buttons with light text. Contrast with --fg: 5.3:1 (hover 5.0:1). */
+  --signal-solid: 192 28 34;
+  --signal-solid-hover: 200 30 36;
 
   --ok: 150 170 140;
   --wait: 214 170 110;
@@ -54,7 +57,7 @@
   }
 
   ::selection {
-    @apply bg-signal text-fg;
+    @apply bg-signal-solid text-fg;
   }
 
   :focus-visible {

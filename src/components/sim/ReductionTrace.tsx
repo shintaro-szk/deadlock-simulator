@@ -2,6 +2,7 @@ import { memo, useEffect, useRef } from 'react';
 import type { ResourceSpec } from '../../core/model';
 import type { ReductionCheck } from '../../core/reduction';
 import { formatVector } from '../../content/simText';
+import { scrollBehavior } from '../../hooks/motion';
 
 interface ReductionTraceProps {
   readonly trace: readonly ReductionCheck[];
@@ -22,11 +23,11 @@ export const ReductionTrace = memo(function ReductionTrace({ trace, resources, d
 
   useEffect(() => {
     const list = listRef.current;
-    if (list) list.scrollTo({ top: list.scrollHeight, behavior: 'smooth' });
+    if (list) list.scrollTo({ top: list.scrollHeight, behavior: scrollBehavior() });
   }, [shown.length]);
 
   return (
-    <ol ref={listRef} aria-label="Algorithm steps" className="max-h-56 space-y-0.5 overflow-y-auto overscroll-contain font-mono text-[11px] leading-5">
+    <ol ref={listRef} aria-label="Algorithm steps" tabIndex={0} className="max-h-56 space-y-0.5 overflow-y-auto overscroll-contain font-mono text-[11px] leading-5">
       {shown.map((check, i) => {
         const current = upTo !== undefined && i === upTo;
         const newPass = i > 0 && trace[i - 1].pass !== check.pass;

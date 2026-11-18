@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { chapters, deck, type ChapterId } from '../../content/deadlocks';
+import { scrollBehavior } from '../../hooks/motion';
 
 interface ChapterRailProps {
   readonly active: ChapterId;
@@ -60,7 +61,7 @@ export function ChapterBar({ active }: ChapterRailProps) {
 
   useEffect(() => {
     const item = listRef.current?.querySelector<HTMLElement>(`[data-chapter="${active}"]`);
-    item?.scrollIntoView({ block: 'nearest', inline: 'center', behavior: 'smooth' });
+    item?.scrollIntoView({ block: 'nearest', inline: 'center', behavior: scrollBehavior() });
   }, [active]);
 
   return (

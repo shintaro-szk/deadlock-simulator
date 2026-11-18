@@ -125,7 +125,7 @@ export default function RecoveryDemo() {
           <button
             type="button"
             onClick={doRecover}
-            className="h-9 rounded bg-signal px-4 text-sm font-medium text-fg transition-colors duration-150 hover:bg-signal-strong"
+            className="h-9 rounded bg-signal-solid px-4 text-sm font-medium text-fg transition-colors duration-150 hover:bg-signal-solid-hover"
           >
             Recover now
           </button>

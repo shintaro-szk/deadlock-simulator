@@ -155,7 +155,7 @@ function RequestCheck({ switcher }: { readonly switcher: ReactNode }) {
               type="button"
               onClick={check}
               disabled={empty}
-              className="h-9 rounded bg-signal px-4 text-sm font-medium text-fg transition-colors duration-150 hover:bg-signal-strong disabled:cursor-not-allowed disabled:bg-surface-2 disabled:text-fg-faint"
+              className="h-9 rounded bg-signal-solid px-4 text-sm font-medium text-fg transition-colors duration-150 hover:bg-signal-solid-hover disabled:cursor-not-allowed disabled:bg-surface-2 disabled:text-fg-faint"
             >
               Is it safe?
             </button>

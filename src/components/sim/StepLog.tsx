@@ -2,6 +2,7 @@ import { memo, useEffect, useRef } from 'react';
 import type { SimState } from '../../core/model';
 import { describeLogEntry } from '../../content/simText';
 import { toneText } from '../tone';
+import { scrollBehavior } from '../../hooks/motion';
 
 interface StepLogProps {
   readonly state: SimState;
@@ -18,7 +19,7 @@ export const StepLog = memo(function StepLog({ state, limit = 40 }: StepLogProps
   useEffect(() => {
     const list = listRef.current;
     if (!list) return;
-    list.scrollTo({ top: list.scrollHeight, behavior: 'smooth' });
+    list.scrollTo({ top: list.scrollHeight, behavior: scrollBehavior() });
   }, [state.log.length]);
 
   if (entries.length === 0) {
@@ -26,7 +27,7 @@ export const StepLog = memo(function StepLog({ state, limit = 40 }: StepLogProps
   }
 
   return (
-    <ol ref={listRef} aria-label="Step log" className="max-h-48 overflow-y-auto overscroll-contain py-1 font-mono text-xs leading-6">
+    <ol ref={listRef} aria-label="Step log" tabIndex={0} className="max-h-48 overflow-y-auto overscroll-contain py-1 font-mono text-xs leading-6">
       {entries.map((entry, i) => {
         const line = describeLogEntry(entry, state.resources);
         return (

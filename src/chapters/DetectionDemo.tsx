@@ -199,7 +199,7 @@ function MultipleInstances({ switcher }: { readonly switcher: ReactNode }) {
             type="button"
             onClick={() => setIndex(Math.min(last, index + 1))}
             disabled={done}
-            className="flex h-9 items-center gap-1.5 rounded bg-signal px-4 text-sm font-medium text-fg hover:bg-signal-strong disabled:bg-surface-2 disabled:text-fg-faint"
+            className="flex h-9 items-center gap-1.5 rounded bg-signal-solid px-4 text-sm font-medium text-fg hover:bg-signal-solid-hover disabled:bg-surface-2 disabled:text-fg-faint"
           >
             Next check <ChevronRight size={16} aria-hidden="true" />
           </button>

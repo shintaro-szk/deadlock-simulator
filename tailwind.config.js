@@ -31,6 +31,8 @@ export default {
           DEFAULT: token('signal'),
           strong: token('signal-strong'),
           dim: token('signal-dim'),
+          solid: token('signal-solid'),
+          'solid-hover': token('signal-solid-hover'),
         },
         ok: token('ok'),
         wait: token('wait'),

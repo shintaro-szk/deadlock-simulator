@@ -11,9 +11,11 @@ export default function ConceptDemo() {
   const started = useRef(false);
   const { play, state } = sim;
 
-  // Play once, the first time the chapter comes into view.
+  // Play once, the first time the chapter comes into view. Readers who ask for reduced motion
+  // start it themselves.
   useEffect(() => {
     if (!active || started.current || state.step > 0) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     started.current = true;
     play();
   }, [active, play, state.step]);

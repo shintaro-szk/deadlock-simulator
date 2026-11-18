@@ -48,7 +48,7 @@ export function Transport({ sim }: TransportProps) {
           onClick={sim.toggle}
           disabled={ended && !sim.playing}
           aria-label={sim.playing ? 'Pause (Space)' : 'Play (Space)'}
-          className="flex h-9 min-w-[6.5rem] items-center justify-center gap-2 rounded bg-signal px-4 font-medium text-fg transition-colors duration-150 hover:bg-signal-strong disabled:cursor-not-allowed disabled:bg-surface-2 disabled:text-fg-faint"
+          className="flex h-9 min-w-[6.5rem] items-center justify-center gap-2 rounded bg-signal-solid px-4 font-medium text-fg transition-colors duration-150 hover:bg-signal-solid-hover disabled:cursor-not-allowed disabled:bg-surface-2 disabled:text-fg-faint"
         >
           {sim.playing ? <Pause size={16} aria-hidden="true" /> : <Play size={16} aria-hidden="true" />}
           <span>{sim.playing ? 'Pause' : 'Play'}</span>

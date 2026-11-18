@@ -34,7 +34,7 @@ export function AppShell({ demos }: AppShellProps) {
   const active = useActiveChapter();
   return (
     <ActiveChapterContext.Provider value={active}>
-      <a href="#concept" className="sr-only z-50 bg-signal px-3 py-2 text-fg focus:not-sr-only focus:fixed focus:left-3 focus:top-3">
+      <a href="#concept" className="sr-only z-50 bg-signal-solid px-3 py-2 text-fg focus:not-sr-only focus:fixed focus:left-3 focus:top-3">
         Skip to content
       </a>
       <div className="flex min-h-screen">
