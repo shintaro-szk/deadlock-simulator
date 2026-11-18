@@ -1,6 +1,26 @@
-# Deadlock Simulator
+<h1 align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/assets/logo-dark.svg">
+    <img src="docs/assets/logo-light.svg" alt="Deadlock Simulator" width="600">
+  </picture>
+</h1>
 
-An educational web application that shows how deadlocks occur in operating systems and how the system handles them. Each chapter pairs the theory with a live simulation.
+<p align="center">
+  <a href="LICENSE"><img src="https://img.shields.io/badge/LICENSE-MIT-2E7D32?style=for-the-badge" alt="License: MIT"></a>
+  <img src="https://img.shields.io/badge/TYPESCRIPT-5.6-3178C6?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript 5.6">
+  <img src="https://img.shields.io/badge/FRAMEWORK-React_18-087EA4?style=for-the-badge&logo=react&logoColor=white" alt="Framework: React 18">
+  <img src="https://img.shields.io/badge/PACKAGE_MANAGER-npm-CB3837?style=for-the-badge&logo=npm&logoColor=white" alt="Package manager: npm">
+  <img src="https://img.shields.io/badge/BUILD-Vite_6-646CFF?style=for-the-badge&logo=vite&logoColor=white" alt="Build: Vite 6">
+  <img src="https://img.shields.io/badge/STYLING-Tailwind_CSS_3.4-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white" alt="Styling: Tailwind CSS 3.4">
+  <img src="https://img.shields.io/badge/TESTING-Vitest_2-6E9F18?style=for-the-badge&logo=vitest&logoColor=white" alt="Testing: Vitest 2">
+  <img src="https://img.shields.io/badge/LINTER-ESLint_9-4B32C3?style=for-the-badge&logo=eslint&logoColor=white" alt="Linter: ESLint 9">
+</p>
+
+<p align="center">
+  <a href="#overview">Overview</a> · <a href="#features">Features</a> · <a href="#setup-instructions">Setup</a> · <a href="#how-to-use">How to Use</a> · <a href="#keyboard-shortcuts">Shortcuts</a> · <a href="#license">License</a>
+</p>
+
+<p align="center"><em>An educational web application that shows how deadlocks occur in operating systems and how the system handles them. Each chapter pairs the theory with a live simulation.</em></p>
 
 ## About This Project
 
