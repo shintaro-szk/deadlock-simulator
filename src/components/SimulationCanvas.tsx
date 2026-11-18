@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { SimulationState } from '../core/types';
+import { SimulationState, Process, Resource } from '../core/types';
 
 interface SimulationCanvasProps {
   state: SimulationState;
@@ -84,7 +84,7 @@ export function SimulationCanvas({ state }: SimulationCanvasProps) {
 
   const getNodeColor = (node: typeof allNodes[0]) => {
     if (node.type === 'resource') return '#10b981';
-    const process = node.data as any;
+    const process = node.data as Process;
     const stateColors: Record<string, string> = {
       idle: '#3b82f6',
       waiting: '#f59e0b',
@@ -224,10 +224,10 @@ export function SimulationCanvas({ state }: SimulationCanvasProps) {
                     const node = allNodes.find(n => n.id === hoveredNode);
                     if (!node) return '';
                     if (node.type === 'process') {
-                      const p = node.data as any;
+                      const p = node.data as Process;
                       return `${p.name}: ${p.state}`;
                     }
-                    const r = node.data as any;
+                    const r = node.data as Resource;
                     return `${r.name}: ${r.availableInstances}/${r.totalInstances}`;
                   })()}
                 </div>

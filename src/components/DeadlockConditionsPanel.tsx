@@ -2,9 +2,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 
-interface DeadlockConditionsPanelProps {}
-
-export function DeadlockConditionsPanel({}: DeadlockConditionsPanelProps) {
+export function DeadlockConditionsPanel() {
   const [expandedCondition, setExpandedCondition] = useState<string | null>(null);
 
   const conditions = [

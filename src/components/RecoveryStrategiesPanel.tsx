@@ -2,9 +2,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown, ChevronUp, Trash2, RotateCcw, AlertTriangle, Shield } from 'lucide-react';
 
-interface RecoveryStrategiesPanelProps {}
-
-export function RecoveryStrategiesPanel({}: RecoveryStrategiesPanelProps) {
+export function RecoveryStrategiesPanel() {
   const [expandedStrategy, setExpandedStrategy] = useState<string | null>(null);
 
   const strategies = [

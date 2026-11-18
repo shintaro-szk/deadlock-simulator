@@ -2,12 +2,73 @@
 @tailwind components;
 @tailwind utilities;
 
+/*
+ * Brand tokens. The app is dark only.
+ * Values are space-separated RGB channels so that Tailwind can apply opacity (bg-signal/10).
+ */
 :root {
-  font-family: Inter, system-ui, sans-serif;
+  color-scheme: dark;
+
+  --bg: 10 10 10;
+  --surface: 18 17 17;
+  --surface-2: 28 26 26;
+  --line: 46 42 42;
+  --line-strong: 82 74 74;
+
+  --fg: 242 238 236;
+  --fg-muted: 168 160 156;
+  --fg-faint: 120 113 110;
+
+  --signal: 230 36 41;
+  --signal-strong: 255 66 66;
+  --signal-dim: 64 14 16;
+
+  --ok: 150 170 140;
+  --wait: 214 170 110;
+
+  --font-sans: 'IBM Plex Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'IBM Plex Sans Condensed', 'IBM Plex Sans', ui-sans-serif, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
 }
 
 @layer base {
+  html {
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
   body {
-    @apply bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-100;
+    @apply bg-bg text-fg;
+    min-height: 100vh;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.01em;
+  }
+
+  ::selection {
+    @apply bg-signal text-fg;
+  }
+
+  :focus-visible {
+    outline: 2px solid rgb(var(--signal));
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
   }
 }

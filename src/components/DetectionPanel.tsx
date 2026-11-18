@@ -2,9 +2,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown, ChevronUp, Search, Clock, Activity } from 'lucide-react';
 
-interface DetectionPanelProps {}
-
-export function DetectionPanel({}: DetectionPanelProps) {
+export function DetectionPanel() {
   const [expandedSection, setExpandedSection] = useState<string | null>(null);
 
   const sections = [

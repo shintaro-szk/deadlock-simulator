@@ -2,9 +2,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown, ChevronUp, Check, X } from 'lucide-react';
 
-interface PreventionStrategiesPanelProps {}
-
-export function PreventionStrategiesPanel({}: PreventionStrategiesPanelProps) {
+export function PreventionStrategiesPanel() {
   const [expandedStrategy, setExpandedStrategy] = useState<string | null>(null);
 
   const strategies = [

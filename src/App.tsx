@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { SimulationCanvas } from './components/SimulationCanvas';
 import { ControlPanel } from './components/ControlPanel';
 import { ScenarioSelector } from './components/ScenarioSelector';
@@ -20,37 +20,47 @@ import { safeScenario } from './scenarios/safeScenario';
 import { deadlockScenario } from './scenarios/deadlockScenario';
 import { preventionScenario } from './scenarios/preventionScenario';
 
+const scenarios: Scenario[] = [safeScenario, deadlockScenario, preventionScenario];
+
 function App() {
-  const [isDark, setIsDark] = useState(false);
   const [selectedScenario, setSelectedScenario] = useState<string>('safe');
   const [simulationState, setSimulationState] = useState<SimulationState | null>(null);
   const [engine, setEngine] = useState<SimulationEngine | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-
-  const scenarios: Scenario[] = [safeScenario, deadlockScenario, preventionScenario];
-
-  useEffect(() => {
-    if (isDark) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-  }, [isDark]);
+  const isLoading = false;
 
   useEffect(() => {
     const scenario = scenarios.find(s => s.id === selectedScenario);
     if (scenario) {
-      setIsLoading(true);
-      setTimeout(() => {
-        const newEngine = new SimulationEngine(scenario.initialState);
-        setEngine(newEngine);
-        setSimulationState(newEngine.getState());
-        setIsPlaying(false);
-        setIsLoading(false);
-      }, 300);
+      const newEngine = new SimulationEngine(scenario.initialState);
+      setEngine(newEngine);
+      setSimulationState(newEngine.getState());
+      setIsPlaying(false);
     }
   }, [selectedScenario]);
+
+  const handlePlay = useCallback(() => {
+    if (engine && !simulationState?.isDeadlocked) {
+      engine.start();
+      setIsPlaying(true);
+      setSimulationState(engine.getState());
+    }
+  }, [engine, simulationState?.isDeadlocked]);
+
+  const handlePause = useCallback(() => {
+    if (engine) {
+      engine.pause();
+      setIsPlaying(false);
+      setSimulationState(engine.getState());
+    }
+  }, [engine]);
+
+  const handleStep = useCallback(() => {
+    if (engine && !simulationState?.isDeadlocked) {
+      engine.step();
+      setSimulationState(engine.getState());
+    }
+  }, [engine, simulationState?.isDeadlocked]);
 
   useEffect(() => {
     const handleKeyPress = (e: KeyboardEvent) => {
@@ -70,30 +80,7 @@ function App() {
 
     window.addEventListener('keydown', handleKeyPress);
     return () => window.removeEventListener('keydown', handleKeyPress);
-  }, [isPlaying, simulationState]);
-
-  const handlePlay = () => {
-    if (engine && !simulationState?.isDeadlocked) {
-      engine.start();
-      setIsPlaying(true);
-      setSimulationState(engine.getState());
-    }
-  };
-
-  const handlePause = () => {
-    if (engine) {
-      engine.pause();
-      setIsPlaying(false);
-      setSimulationState(engine.getState());
-    }
-  };
-
-  const handleStep = () => {
-    if (engine && !simulationState?.isDeadlocked) {
-      engine.step();
-      setSimulationState(engine.getState());
-    }
-  };
+  }, [isPlaying, simulationState?.isDeadlocked, handlePlay, handlePause, handleStep]);
 
   const handleReset = () => {
     const scenario = scenarios.find(s => s.id === selectedScenario);
@@ -135,17 +122,11 @@ function App() {
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 p-8">
-      <header className="flex justify-between items-center mb-8">
-        <h1 className="text-4xl font-bold text-gray-900 dark:text-gray-100">
+      <header className="mb-8 flex items-baseline gap-3 border-b border-line pb-4">
+        <span aria-hidden="true" className="inline-block h-3 w-3 self-center bg-signal" />
+        <h1 className="font-display text-4xl font-bold text-fg">
           Deadlock Simulator
         </h1>
-        <button
-          onClick={() => setIsDark(!isDark)}
-          className="px-4 py-2 rounded-lg bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-gray-100 font-medium focus:outline-none focus:ring-2 focus:ring-process"
-          aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
-        >
-          {isDark ? 'Light Mode' : 'Dark Mode'}
-        </button>
       </header>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">

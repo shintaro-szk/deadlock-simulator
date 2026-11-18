@@ -30,7 +30,7 @@ export function ControlPanel({
             flex items-center gap-2 px-6 py-3 rounded-lg font-medium
             ${isDeadlocked
               ? 'bg-gray-300 dark:bg-gray-600 text-gray-500 dark:text-gray-400 cursor-not-allowed'
-              : 'bg-process hover:bg-process-hover text-white'
+              : 'bg-signal hover:bg-signal-strong text-fg'
             }
             transition-colors duration-200
           `}
@@ -49,7 +49,7 @@ export function ControlPanel({
             flex items-center gap-2 px-6 py-3 rounded-lg font-medium
             ${isDeadlocked
               ? 'bg-gray-300 dark:bg-gray-600 text-gray-500 dark:text-gray-400 cursor-not-allowed'
-              : 'bg-safe hover:bg-green-600 text-white'
+              : 'border border-line-strong bg-surface-2 hover:border-fg-muted text-fg'
             }
             transition-colors duration-200
           `}

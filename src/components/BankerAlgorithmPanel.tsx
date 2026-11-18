@@ -2,9 +2,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown, ChevronUp, Shield, AlertTriangle } from 'lucide-react';
 
-interface BankerAlgorithmPanelProps {}
-
-export function BankerAlgorithmPanel({}: BankerAlgorithmPanelProps) {
+export function BankerAlgorithmPanel() {
   const [expandedSection, setExpandedSection] = useState<string | null>(null);
 
   const sections = [

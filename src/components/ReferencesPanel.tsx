@@ -2,9 +2,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown, ChevronUp, BookOpen, GraduationCap, ExternalLink } from 'lucide-react';
 
-interface ReferencesPanelProps {}
-
-export function ReferencesPanel({}: ReferencesPanelProps) {
+export function ReferencesPanel() {
   const [expandedSection, setExpandedSection] = useState<string | null>(null);
 
   const sections = [
