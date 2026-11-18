@@ -1,8 +1,8 @@
 import { useEffect, useRef } from 'react';
-import { Github } from 'lucide-react';
-import { chapters, credits, deck, type ChapterId } from '../../content/deadlocks';
+import { chapters, deck, type ChapterId } from '../../content/deadlocks';
 import { scrollBehavior } from '../../hooks/motion';
 import { BrandMark } from './BrandMark';
+import { RepoCredit } from './RepoCredit';
 
 interface ChapterRailProps {
   readonly active: ChapterId;
@@ -44,18 +44,8 @@ export function ChapterRail({ active }: ChapterRailProps) {
         <div className="flex justify-between"><dt>Step</dt><dd className="text-fg-muted">← →</dd></div>
         <div className="flex justify-between"><dt>Reset</dt><dd className="text-fg-muted">R</dd></div>
       </dl>
-      <div className="mt-5 flex items-center justify-between gap-2 border-t border-line pt-4">
-        <span className="truncate text-xs text-fg-faint">{credits.author}</span>
-        <a
-          href={credits.repoUrl}
-          target="_blank"
-          rel="noreferrer"
-          title={credits.repoLabel}
-          className="-m-1.5 flex shrink-0 items-center justify-center p-1.5 text-fg-muted transition-colors duration-150 hover:text-fg coarse:min-h-11 coarse:min-w-11"
-        >
-          <Github size={16} aria-hidden="true" />
-          <span className="sr-only">{`${credits.repoLabel} ${credits.newTab}`}</span>
-        </a>
+      <div className="mt-5 border-t border-line pt-4">
+        <RepoCredit className="w-full justify-between gap-2" />
       </div>
     </nav>
   );
@@ -74,7 +64,8 @@ export function ChapterBar({ active }: ChapterRailProps) {
     <nav aria-label="Chapters" className="sticky top-0 z-20 border-b border-line bg-bg lg:hidden">
       <div className="flex items-center gap-2.5 px-4 pt-3">
         <BrandMark className="h-6 w-6" />
-        <span className="truncate font-display text-brand font-semibold text-fg">{deck.title}</span>
+        <span className="min-w-0 font-display text-brand font-semibold leading-tight text-fg">{deck.title}</span>
+        <RepoCredit className="ml-auto shrink-0 gap-1.5" />
       </div>
       <ol ref={listRef} className="scrollbar-none flex gap-1 overflow-x-auto px-3 py-2">
         {chapters.map((c) => {

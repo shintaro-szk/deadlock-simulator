@@ -5,12 +5,15 @@ import { createSim, step } from '../core/engine';
 export const SPEEDS = [0.5, 1, 2, 4] as const;
 export type Speed = (typeof SPEEDS)[number];
 
+/** The speed of each demo when the page loads. Reset keeps the speed that the reader selected. */
+export const DEFAULT_SPEED: Speed = 0.5;
+
 /** Time between two autoplay steps at 1× speed. */
 const BASE_INTERVAL_MS = 850;
 /** The history keeps this many states for step back. */
 const HISTORY_LIMIT = 400;
 
-interface SimStore {
+export interface SimStore {
   readonly history: readonly SimState[];
   readonly index: number;
   readonly playing: boolean;
@@ -27,6 +30,11 @@ type Action =
   | { readonly type: 'apply'; readonly update: (state: SimState) => SimState };
 
 const current = (store: SimStore) => store.history[store.index];
+
+/** The first state of a demo: paused, at step 0, at the default speed. */
+export function initialStore(scenario: Scenario, policy: Policy): SimStore {
+  return { history: [createSim(scenario, policy)], index: 0, playing: false, speed: DEFAULT_SPEED };
+}
 
 /** Add a state after the current one. Any "redo" states after the current one drop off. */
 function push(store: SimStore, next: SimState): SimStore {
@@ -87,12 +95,7 @@ export interface UseSimulationOptions {
  * the display and stop when the tab is hidden.
  */
 export function useSimulation(scenario: Scenario, policy: Policy, options: UseSimulationOptions = {}): SimulationControls {
-  const [store, dispatch] = useReducer(reducer, undefined, (): SimStore => ({
-    history: [createSim(scenario, policy)],
-    index: 0,
-    playing: false,
-    speed: 1,
-  }));
+  const [store, dispatch] = useReducer(reducer, undefined, () => initialStore(scenario, policy));
 
   // Start again when the scenario or the policy changes. The first render already has the right
   // state, so a repeated effect run (React StrictMode) must not reset it.

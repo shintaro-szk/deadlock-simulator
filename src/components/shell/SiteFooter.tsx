@@ -1,16 +1,11 @@
 import { ArrowUpRight, Github } from 'lucide-react';
 import { credits } from '../../content/deadlocks';
 
-/** The end of the page: the author, the source of the content, and a link to the source code. */
+/** The end of the page: the source of the content and a link to the source code. */
 export function SiteFooter() {
   return (
     <footer className="flex flex-col gap-6 border-t border-line py-10 sm:flex-row sm:items-end sm:justify-between">
-      <div className="space-y-1.5">
-        <p className="text-sm text-fg-muted">
-          {credits.authorLabel} <span className="text-fg">{credits.author}</span>
-        </p>
-        <p className="font-mono text-xs text-fg-faint">{credits.basedOn}</p>
-      </div>
+      <p className="font-mono text-xs text-fg-faint">{credits.basedOn}</p>
       <a
         href={credits.repoUrl}
         target="_blank"
